@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         // Algorithme de creation de 10 users avec 1 à 4 posts chaqun avec une note (ratings) aléatoire
-        $ratings = Rating::factory(10)->create();
-        User::factory(10)->create()->each(function ($user) use ($ratings) {
+        $rating = Rating::factory(10)->create();
+        User::factory(10)->create()->each(function ($user) use ($rating) {
             Post::factory(rand(1,4))->create([
                 'user_id' => $user->id,
-                'rating_id' => ($ratings->random(1)->first())->id,
+                'rating_id' => ($rating->random(1)->first())->id,
             ]);
         });
         

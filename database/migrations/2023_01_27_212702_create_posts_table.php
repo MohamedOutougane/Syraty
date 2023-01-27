@@ -24,8 +24,8 @@ return new class extends Migration
             $table->boolean('public')->default(false);
             $table->timestamps();
 
-            $table->foreignId(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignId(Rating::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Rating::class);
         });
     }
 

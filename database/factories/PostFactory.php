@@ -17,7 +17,12 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            //
+            // making faker values here
+            "title" => $this->faker->sentence(rand(1,3), true),
+            "body" => $this->faker->paragraph(rand(1,4), true),
+            "slug" => $this->faker->slug(rand(1,4), true),
+            "image" => $this->faker->imageUrl(640, 480, 'cats', true, 'Faker'),
+            "public" => $this->faker->boolean(50),
         ];
     }
 }

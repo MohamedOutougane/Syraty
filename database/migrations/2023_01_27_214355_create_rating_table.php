@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('rating', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->int();
             $table->timestamps();
         });
     }

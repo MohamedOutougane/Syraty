@@ -15,7 +15,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        //Cette méthode de "PostController" récupère tous les articles de la base de données
+        // et les envoie à la vue "posts.index" pour les afficher.
+        $posts = Post::all();
+
+        return view('posts.index', compact('posts'));
     }
 
     /**

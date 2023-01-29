@@ -92,13 +92,13 @@
                                 </div>
                                 <div class="post-image">
                                     <a href="{{ route('posts.show', $post->id) }}">
-                                        <img src="{{ asset($post->image) }}" alt="Image de l'article">
+                                        <img src="{{ asset('storage/' . $post->image) }}" alt="Image de l'article">
                                     </a>
                                 </div>
                             @else
                                 <div class="post-image">
                                     <a href="{{ route('posts.show', $post->id) }}">
-                                        <img src="{{ asset($post->image) }}" alt="Image de l'article">
+                                        <img src="{{ asset('storage/' . $post->image) }}" alt="Image de l'article">
                                     </a>
                                 </div>
                                 <div class="post-body">

@@ -4,6 +4,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <title>Accueil - ItsMe</title>
     </head>
@@ -15,24 +17,57 @@
 
         <div class="posts-wrapper">
 
-            <!-- <div class="posts-creator">
+            <div class="posts-creator">
                 <div class="creator-title">
                     Créer un post
                 </div>
-                <div class="creator-button">
-                    <button>+</button>
-                </div>
-                 <a href="{{ route('posts.create') }}">
-                </a>
-                <div class="posts-form">
-                    <form action="">
+                <div class="form-container">
+                    <form action="" method="post">
+                        @csrf
+                        @component('components.formInput', [
+                            'title' => 'Title',
+                            'name' => 'title',
+                            'type' => 'text',
+                            'value' => $newPost->title
+                        ])
+                        @endComponent
                         
+                        @component('components.formInput', [
+                            'title' => 'Contenu',
+                            'name' => 'content',
+                            'type' => 'textarea',
+                            'value' => $newPost->body
+                        ])
+                        @endComponent
+
+                        @component('components.formInput', [
+                            'title' => 'Note',
+                            'options' => $ratings,
+                            'name' => 'public',
+                            'type' => 'select',
+                            'value' => $newPost->public
+                        ])
+                        @endComponent
+                        
+                        @component('components.formInput', [
+                            'title' => 'Public ?',
+                            'name' => 'public',
+                            'type' => 'checkbox',
+                            'value' => $newPost->public
+                        ])
+                        @endComponent
+
+                        <button type="submit">Poster</button>
                     </form>
                 </div>
-            </div> -->
+
+                
+                <div class="creator-button">
+                    <button><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
 
             <h1>Mon fil</h1>
-
             <ul>
                 @foreach ($posts as $post)
                     <div class="post">
@@ -91,12 +126,16 @@
                 @endforeach
             </ul>
 
-            {{ $posts->links() }}
+            <div class="paginator-wrapper">
+                {{ $posts->links() }}
+            </div>
         </div>
 
         <footer>
         @include('footer')
         </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{{ asset('js/app.js') }}">
     </body>
 </html>
     

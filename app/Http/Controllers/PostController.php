@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Rating;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
@@ -26,8 +27,13 @@ class PostController extends Controller
         $posts = Post::with('user')->paginate(7);
 
 
+        $newPost = new Post();
+        $ratings = Rating::all();
+
+
+
         // et les envoie à la vue "posts.index" pour les afficher.
-        return view('posts.index', compact('posts'));
+        return view('posts.index', compact('posts', 'newPost', 'ratings'));
     }
 
     /**

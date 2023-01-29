@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -16,9 +17,16 @@ class PostController extends Controller
     public function index()
     {
         //Cette méthode de "PostController" récupère tous les articles de la base de données
-        // et les envoie à la vue "posts.index" pour les afficher.
-        $posts = Post::all();
+        // $posts = Post::all();
 
+        //Cette méthode récupère tous les articles de la base de données avec leur user
+        // $posts = Post::with('user')->get()->all();
+
+        //Cette méthode récupère tous les articles de la base de données avec leur user et les pagine de 7 en 7
+        $posts = Post::with('user')->paginate(7);
+
+
+        // et les envoie à la vue "posts.index" pour les afficher.
         return view('posts.index', compact('posts'));
     }
 

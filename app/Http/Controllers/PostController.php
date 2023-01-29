@@ -23,8 +23,8 @@ class PostController extends Controller
         //Cette méthode récupère tous les articles de la base de données avec leur user
         // $posts = Post::with('user')->get()->all();
 
-        //Cette méthode récupère tous les articles de la base de données avec leur user et les pagine de 7 en 7
-        $posts = Post::with('user')->paginate(7);
+        //Cette méthode récupère tous les articles de la base de données avec leur user les tris par les pluys récents et les pagine de 7 en 7
+        $posts = Post::with('user')->latest()->paginate(7);
 
 
         $newPost = new Post();
@@ -54,7 +54,41 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+
+        // je récupère les données du formulaire
+        $data = $request->all();
+
+        // j'attribut une valeur provisoire à la variable $user_id 
+        $user_id = 1;
+
+        // je remplace les espaces par des tirets dans le titre
+        $slug = str_replace(' ', '-', $data['title']);
+
+        // je donne un nom à l'image avec le nom de l'utilisateur, le titre de l'article et le timestamp
+        $imageName = $user_id . '_' . $slug . '_' . time() . '.' . $request->image->extension();
+         
+        // je déplace l'image dans le dossier "public/storage" du projet
+        $request->image->move(public_path('storage'), $imageName);
+
+        // définit la valeur de $public si la clé "public" existe dans $data à 1, sinon elle est définie à 0.
+        $public = array_key_exists('public', $data) ? 1 : 0;
+
+        // je crée un nouvel article avec les données du formulaire
+        Post::create([
+            'title' => $data['title'],
+            'body' => $data['body'],
+            'image' => $imageName,
+            'rating_id' => $data['rating_id'],
+            'public' => $public,
+            'slug' => $slug,
+            'user_id' => $user_id
+         ])->saveOrFail(); // si l'article n'est pas créé, une erreur est renvoyée
+
+        //  je crée un message de succès
+        session()->flash("success", "Votre article a bien été ajouté !");
+
+        // je redirige vers la page d'accueil
+        return redirect()->route('posts.index');
     }
 
     /**

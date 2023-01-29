@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #000;
+    background-color: #fff;
+}
+
+
+/* COMMON ELEMENTS */
+button {
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: solid 2px #000;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+}
+.circle.red{
+    background-color: #860000;
+}
+.circle.orange{
+    background-color: #ff8800;
+}
+.circle.yellow{
+    background-color: #ffd000;
+}
+.circle.green{
+    background-color: #00ff15;
+}
+.circle.blue{
+    background-color: #00aeff;
+}
+.circle.gray{
+    background-color: #646464;
+}
+/* COMMON ELEMENTS */
+
+
+/*  HEADER */
+header {
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+    font-size: 1.25em;
+    font-weight: 500;
+    position: sticky;
+    top: 0;
+}
+
+header .header-top {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 1em;
+    height: 100px;
+    align-items: center;
+}
+
+header .logo {
+    max-width: 10%;
+    max-height: 100%;
+}
+
+header img {
+    max-width: 100%;
+    height: 70px;
+}
+
+header .navigation {
+    width: 50%;
+}
+
+header .navigation ul {
+    display: flex;
+    justify-content: space-evenly;
+    color: rgb(78, 78, 78);
+}
+
+header .authentification {
+    width: 21%;
+}
+
+header .authentification ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .register-button {
+    background-color: #e4743f;
+    color: #fff;
+    border: none;
+}
+
+header .register-button:hover {
+    background-color: #ffffff;
+    color: #e4743f;
+    border: solid 2px #e4743f;
+}
+
+header div.stylised-border {
+    width: 95%;
+    margin: auto;
+    height: 0px;
+    border-bottom: solid 2px #3b302d;
+    border-radius: 50px;
+}
+/* HEADER */
+
+/* POSTS */
+.posts-wrapper {
+    width: 90%;
+    padding: 5em;
+    margin: auto;
+}
+
+.posts-wrapper h1 {
+    text-align: center;
+}
+
+.posts-wrapper .post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.posts-wrapper .post-title {
+    font-size: 1.2em;
+}
+
+.posts-wrapper .post-content {
+    display: flex;
+    justify-content: space-between;
+    height: 250px;
+}
+
+.posts-wrapper .post-image, .posts-wrapper .post-body {
+    width: 50%;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+.post-image img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+
+/* POSTS */
+
+
+/*  FOOTER */
+footer {
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+footer .footer-top {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 1em;
+    height: 100px;
+    align-items: center;
+}
+/* FOOTER */

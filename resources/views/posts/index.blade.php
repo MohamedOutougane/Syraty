@@ -22,7 +22,7 @@
                     Créer un post
                 </div>
                 <div class="form-container">
-                    <form action="" method="post" class ="form-action-post">
+                    <form action=" {{ route('posts.store') }} " method="post" class ="form-action-post" enctype="multipart/form-data">
                         @csrf
                         @component('components.formInput', [
                             'title' => 'Title',
@@ -42,7 +42,7 @@
 
                         @component('components.formInput', [
                             'title' => 'Image',
-                            'name' => 'public',
+                            'name' => 'image',
                             'type' => 'file',
                             'value' => $newPost->image
                         ])
@@ -60,8 +60,7 @@
                         @component('components.formInput', [
                             'title' => 'Public ?',
                             'name' => 'public',
-                            'type' => 'checkbox',
-                            'value' => $newPost->public
+                            'type' => 'checkbox'
                         ])
                         @endComponent
 

@@ -13,7 +13,8 @@ class StorePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        // return false; // turn false to stop the user from creating a post
+        return true;
     }
 
     /**
@@ -24,7 +25,12 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            // regles de validation de formulaire
+            'title' => 'required|unique:posts,title|max:130',
+            'body' => 'required|min:5',
+            'public' => 'nullable',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'rating_id' => 'required',
         ];
     }
 }

@@ -22,7 +22,7 @@
                     Créer un post
                 </div>
                 <div class="form-container">
-                    <form action="" method="post">
+                    <form action="" method="post" class ="form-action-post">
                         @csrf
                         @component('components.formInput', [
                             'title' => 'Title',
@@ -34,18 +34,26 @@
                         
                         @component('components.formInput', [
                             'title' => 'Contenu',
-                            'name' => 'content',
+                            'name' => 'body',
                             'type' => 'textarea',
                             'value' => $newPost->body
                         ])
                         @endComponent
 
                         @component('components.formInput', [
+                            'title' => 'Image',
+                            'name' => 'public',
+                            'type' => 'file',
+                            'value' => $newPost->image
+                        ])
+                        @endComponent
+
+                        @component('components.formInput', [
                             'title' => 'Note',
                             'options' => $ratings,
-                            'name' => 'public',
+                            'name' => 'rating_id',
                             'type' => 'select',
-                            'value' => $newPost->public
+                            'value' => $newPost->rating_id
                         ])
                         @endComponent
                         

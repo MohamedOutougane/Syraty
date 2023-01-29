@@ -1,7 +1,11 @@
 <div class="form-group">
-    <label for="{{ $name }}">
-        {{ $title }}
-    </label>
+    @if ($type != 'checkbox')
+        <label for="{{ $name }}">
+            {{ $title }}
+        </label>
+    @else 
+        public ?
+    @endif
     @if($type == 'textarea')
         <textarea name="{{ $name }}" id="{{ $name }}" cols="30" rows="10" class="form-control">
             {{ $value }}
@@ -14,6 +18,10 @@
                 </option>
             @endforeach
         </select>
+    @elseif ($type == 'checkbox')
+        <input type="{{ $type }}" name="{{ $name }}" id="{{ $name }}" value="{{ $value }}">
+    @elseif ($type == 'file')
+        <input type="{{ $type }}" name="{{ $name }}" id="{{ $name }}" class="form-control-file">
     @else
         <input type="{{ $type }}" name="{{ $name }}" id="{{ $name }}" class="form-control" value="{{ $value }}">
     @endif

@@ -78,10 +78,33 @@
             <ul>
                 @foreach ($posts as $post)
                     <div class="post">
-                        <div class="post-title">
-                            <a href="{{ route('posts.show', $post->id) }}">
-                                {{ $post->title }}  -  {{ $post->user->name }}  -  {{ $post->created_at->locale('fr_FR')->format('d M Y') }}
-                            </a>
+                        <div class="post-entete">
+                            <div class="post-title">
+                                <a href="{{ route('posts.show', $post->id) }}">
+                                    {{ $post->title }}  -  {{ $post->user->name }}  -  {{ $post->created_at->locale('fr_FR')->format('d M Y') }}
+                                </a>
+                            </div>
+                            <div class="post-rating">
+                                @switch($post->rating_id)
+                                    @case(1)
+                                        <div class="circle red"></div>
+                                        @break
+                                    @case(2)
+                                        <div class="circle orange"></div>
+                                        @break
+                                    @case(3)
+                                        <div class="circle yellow"></div>
+                                        @break@
+                                    @case(4)
+                                        <div class="circle green"></div>
+                                        @break
+                                    @case(5)
+                                        <div class="circle blue"></div>
+                                        @break
+                                    @default
+                                        <div class="circle grey"></div>
+                                @endswitch
+                            </div>
                         </div>
                         <div class="post-content">
                             @if ($post->id % 2 == 0)
@@ -108,27 +131,13 @@
                                 </div>
                             @endif
                         </div>
-                        <div class="post-rating">
-                            @switch($post->rating_id)
-                                @case(1)
-                                    <div class="circle red"></div>
-                                    @break
-                                @case(2)
-                                    <div class="circle orange"></div>
-                                    @break
-                                @case(3)
-                                    <div class="circle yellow"></div>
-                                    @break@
-                                @case(4)
-                                    <div class="circle green"></div>
-                                    @break
-                                @case(5)
-                                    <div class="circle blue"></div>
-                                    @break
-                                @default
-                                    <div class="circle grey"></div>
-                            @endswitch
-                        </div>
+                        <form action="{{ route('posts.destroy', $post)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <div class="post-delete-button">
+                                <button>Supprimer</button>
+                            </div>
+                        </form>
                     </div>
                 @endforeach
             </ul>

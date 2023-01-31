@@ -133,6 +133,13 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        // je supprime l'article
+        $post->delete();
+
+        //  je crée un message de succès
+        session()->flash("success", "Votre article a bien été supprimé !");
+
+        // je redirige vers la page d'accueil
+        return redirect()->route('posts.index');
     }
 }

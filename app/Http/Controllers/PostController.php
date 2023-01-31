@@ -23,17 +23,35 @@ class PostController extends Controller
         //Cette méthode récupère tous les articles de la base de données avec leur user
         // $posts = Post::with('user')->get()->all();
 
-        //Cette méthode récupère tous les articles de la base de données avec leur user les tris par les pluys récents et les pagine de 7 en 7
-        $posts = Post::with('user')->latest()->paginate(7);
+        //Je veux récuperer seulement les posts de l'utilisateurs connecté et les trié par plus récent et les pagineer de 7 en 7
+        $posts = Post::where('user_id', auth()->user()->id)->with('user')->latest()->paginate(7);
+
+        $newPost = new Post();
+        $ratings = Rating::all();
+
+        // et les envoie à la vue "posts.index" pour les afficher.
+        return view('posts.index', compact('posts', 'newPost', 'ratings'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexHome()
+    {
+
+        //Cette méthode récupère tous les articles de la base de données qui ont la valeur "public" a 1 avec leur user les tris par les pluys récents et les pagine de 7 en 7
+        $posts = Post::where('public', 1)->with('user')->latest()->paginate(7);
+
+
+        // $posts = Post::with('user')->latest()->paginate(7);
 
 
         $newPost = new Post();
         $ratings = Rating::all();
 
-
-
-        // et les envoie à la vue "posts.index" pour les afficher.
-        return view('posts.index', compact('posts', 'newPost', 'ratings'));
+        return view('index', compact('posts', 'ratings'));
     }
 
     /**

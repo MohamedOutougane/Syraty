@@ -21,8 +21,8 @@ Route::get('/', [PostController::class, 'indexHome'])->name('index');
 
 // je veux que la route "/" soit gérée par le controller "PostController" et la méthode "index"
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('auth');
-// cette méthode permet de dire que le crud passe par le controller "PostController" excepté la méthode "index"
-Route::resource('posts', PostController::class)->except('index'); // add : " ->middleware('auth'); " to protect the route by authentification
+// cette méthode permet de dire que le crud passe par le controller "PostController" excepté la méthode "indexHome"
+Route::resource('posts', PostController::class)->except('indexHome'); // add : " ->middleware('auth'); " to protect the route by authentification
 
 
 

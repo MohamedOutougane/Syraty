@@ -141,6 +141,9 @@ header div.stylised-border {
     width: 90%;
     padding: 5em;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .posts-wrapper h1 {

@@ -43,5 +43,17 @@
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
+
+        <!-- j'ajoute ça pour ajouter un boutton d'inscription -->
+        <div class="flex items-center justify-end mt-4">
+                <p class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                    {{ __("Don't have an account yet?") }}
+                </p>
+
+            <x-primary-button class="ml-3">
+                <a href="{{ route('register') }}">{{ __('Register') }}</a>
+            </x-primary-button>
+        </div>
+        <!-- fin de mon ajout -->
     </form>
 </x-guest-layout>

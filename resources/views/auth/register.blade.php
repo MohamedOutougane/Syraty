@@ -40,13 +40,23 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
 
             <x-primary-button class="ml-4">
                 {{ __('Register') }}
             </x-primary-button>
         </div>
+
+        <!-- Ajouter par moi pour avoir un bouton de connexion -->
+        <div class="flex items-center justify-end mt-4">
+            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
+                {{ __('Already registered?') }}
+            </a>
+
+            <x-primary-button class="ml-4">
+                <a href="{{ route('login') }}">{{ __('Login') }}</a>
+            </x-primary-button>
+        </div>
+        <!-- fin d'ajout -->
+
     </form>
 </x-guest-layout>

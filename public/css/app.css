@@ -105,6 +105,14 @@ header .navigation ul {
     color: rgb(78, 78, 78);
 }
 
+header .navigation li:hover {
+    color: rgb(60 48 45);
+}
+
+header li.navigation-selected {
+    color: rgb(60 48 45);
+}
+
 header .authentification {
     width: 21%;
 }

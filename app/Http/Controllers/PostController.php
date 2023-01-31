@@ -17,20 +17,23 @@ class PostController extends Controller
      */
     public function index()
     {
-        //Cette méthode de "PostController" récupère tous les articles de la base de données
-        // $posts = Post::all();
 
-        //Cette méthode récupère tous les articles de la base de données avec leur user
-        // $posts = Post::with('user')->get()->all();
+        //Si l'utilisateur n'est pas connecté, je le redirige vers la page de connexion
+        if (!auth()->user()) {
+            return view('auth.login');
+        }
 
         //Je veux récuperer seulement les posts de l'utilisateurs connecté et les trié par plus récent et les pagineer de 7 en 7
         $posts = Post::where('user_id', auth()->user()->id)->with('user')->latest()->paginate(7);
+
+        //je veux l'id de l'user connecté
+        $user_id = auth()->user()->id;
 
         $newPost = new Post();
         $ratings = Rating::all();
 
         // et les envoie à la vue "posts.index" pour les afficher.
-        return view('posts.index', compact('posts', 'newPost', 'ratings'));
+        return view('posts.index', compact('posts', 'newPost', 'ratings', 'user_id'));
     }
 
     /**
@@ -44,14 +47,17 @@ class PostController extends Controller
         //Cette méthode récupère tous les articles de la base de données qui ont la valeur "public" a 1 avec leur user les tris par les pluys récents et les pagine de 7 en 7
         $posts = Post::where('public', 1)->with('user')->latest()->paginate(7);
 
+        //je veux l'id de l'user connecté
+        if (auth()->user()) {
+            $user_id = auth()->user()->id;
+        } else {
+            $user_id = null;
+        }
 
-        // $posts = Post::with('user')->latest()->paginate(7);
-
-
-        $newPost = new Post();
+        // je récupère tous les ratings
         $ratings = Rating::all();
 
-        return view('index', compact('posts', 'ratings'));
+        return view('index', compact('posts', 'ratings', 'user_id'));
     }
 
     /**
@@ -76,8 +82,8 @@ class PostController extends Controller
         // je récupère les données du formulaire
         $data = $request->all();
 
-        // j'attribut une valeur provisoire à la variable $user_id 
-        $user_id = 1;
+        //je veux l'id de l'user connecté
+        $user_id = auth()->user()->id;
 
         // je remplace les espaces par des tirets dans le titre
         $slug = str_replace(' ', '-', $data['title']);

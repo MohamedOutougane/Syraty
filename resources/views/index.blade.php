@@ -17,72 +17,12 @@
 
         <div class="posts-wrapper">
 
-            <div class="posts-creator">
-                <div class="creator-title">
-                    Créer un post
-                </div>
-                <div class="form-container">
-                    <form action=" {{ route('posts.store') }} " method="post" class ="form-action-post" enctype="multipart/form-data">
-                        @csrf
-                        @component('components.formInput', [
-                            'title' => 'Title',
-                            'name' => 'title',
-                            'type' => 'text',
-                            'value' => $newPost->title
-                        ])
-                        @endComponent
-                        
-                        @component('components.formInput', [
-                            'title' => 'Contenu',
-                            'name' => 'body',
-                            'type' => 'textarea',
-                            'value' => $newPost->body
-                        ])
-                        @endComponent
-
-                        @component('components.formInput', [
-                            'title' => 'Image',
-                            'name' => 'image',
-                            'type' => 'file',
-                            'value' => $newPost->image
-                        ])
-                        @endComponent
-
-                        @component('components.formInput', [
-                            'title' => 'Note',
-                            'options' => $ratings,
-                            'name' => 'rating_id',
-                            'type' => 'select',
-                            'value' => $newPost->rating_id
-                        ])
-                        @endComponent
-                        
-                        @component('components.formInput', [
-                            'title' => 'Public ?',
-                            'name' => 'public',
-                            'type' => 'checkbox'
-                        ])
-                        @endComponent
-
-                        <button type="submit">Poster</button>
-                    </form>
-                </div>
-
-                
-                <div class="creator-button">
-                    <button><i class="fa-solid fa-plus"></i></button>
-                </div>
-            </div>
-
-            <h1>Mon fil</h1>
             <ul>
                 @foreach ($posts as $post)
                     <div class="post">
                         <div class="post-entete">
                             <div class="post-title">
-                                <a href="{{ route('posts.show', $post->id) }}">
-                                    {{ $post->title }}  -  {{ $post->user->name }}  -  {{ $post->created_at->locale('fr_FR')->format('d M Y') }}
-                                </a>
+                                {{ $post->title }}  -  {{ $post->user->name }}  -  {{ $post->created_at->locale('fr_FR')->format('d M Y') }}
                             </div>
                             <div class="post-rating">
                                 @switch($post->rating_id)
@@ -109,9 +49,7 @@
                         <div class="post-content">
                             @if ($post->id % 2 == 0)
                                 <div class="post-body">
-                                    <a href="{{ route('posts.show', $post->id) }}">
-                                        {{ $post->body }}
-                                    </a>
+                                    {{ $post->body }}
                                 </div>
                                 <div class="post-image">
                                     <a href="{{ route('posts.show', $post->id) }}">
@@ -125,19 +63,10 @@
                                     </a>
                                 </div>
                                 <div class="post-body">
-                                    <a href="{{ route('posts.show', $post->id) }}">
-                                        {{ $post->body }}
-                                    </a>
+                                    {{ $post->body }}
                                 </div>
                             @endif
                         </div>
-                        <form action="{{ route('posts.destroy', $post)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <div class="post-delete-button">
-                                <button>Supprimer</button>
-                            </div>
-                        </form>
                     </div>
                 @endforeach
             </ul>

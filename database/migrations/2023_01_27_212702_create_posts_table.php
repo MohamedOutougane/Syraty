@@ -17,8 +17,8 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 100);
-            $table->text('body', 2500)->nullable()->default(null);
+            $table->string('title', 130);
+            $table->text('body')->nullable()->default(null);
             $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->boolean('public')->default(false);

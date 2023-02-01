@@ -21,7 +21,7 @@
             @include('search')
         </div>
 
-            <ul>
+            <div class="posts-fil">
                  @foreach ($posts as $index => $post)
                     <div class="post">
                         <div class="post-entete">
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                 @endforeach
-            </ul>
+            </div>
 
             <div class="paginator-wrapper">
                 {{ $posts->links() }}

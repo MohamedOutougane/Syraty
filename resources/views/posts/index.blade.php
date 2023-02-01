@@ -78,8 +78,7 @@
                 </div>
             </div>
 
-            <h1>Mon fil</h1>
-            <ul>
+            <div class="posts-fil">
                 @foreach ($posts as $index => $post)
                     <div class="post">
                         <div class="post-entete">
@@ -144,7 +143,7 @@
                         </form>
                     </div>
                 @endforeach
-            </ul>
+            </div>
 
             <div class="paginator-wrapper">
                 {{ $posts->links() }}

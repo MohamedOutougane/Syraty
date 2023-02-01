@@ -17,7 +17,7 @@
 
         <div class="posts-wrapper">
 
-        <div>
+        <div class="search-container">
             @include('search')
         </div>
 

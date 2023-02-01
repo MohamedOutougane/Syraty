@@ -13,7 +13,7 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
     font-size: 16px;
     color: #000;
     background-color: #fff;
@@ -106,11 +106,11 @@ header .navigation ul {
 }
 
 header .navigation li:hover {
-    color: rgb(60 48 45);
+    color: #474a2c;
 }
 
 header li.navigation-selected {
-    color: rgb(60 48 45);
+    color: #474a2c;
 }
 
 header .authentification {
@@ -124,27 +124,29 @@ header .authentification ul {
 }
 
 header .register-button {
-    background-color: #e4743f;
+    background-color: #645e9d;
     color: #fff;
     border: none;
 }
 
 header .register-button:hover {
     background-color: #ffffff;
-    color: #e4743f;
-    border: solid 2px #e4743f;
+    color: #645e9d;
+    border: solid 2px #645e9d;
 }
 
 header div.stylised-border {
     width: 95%;
     margin: auto;
     height: 0px;
-    border-bottom: solid 2px #3b302d;
+    border-bottom: solid 2px #474a2c;
     border-radius: 50px;
 }
 /* HEADER */
 
 /* POSTS */
+
+/* SEARCHFORM */
 .posts-wrapper {
     width: 90%;
     padding: 5em;
@@ -153,6 +155,54 @@ header div.stylised-border {
     flex-direction: column;
     align-items: center;
 }
+
+.posts-wrapper .search-container {
+    padding: 1em;
+    margin: 1em;
+    border-radius: 1em;
+    box-shadow: 0em 0em 5px 0 #939393;
+    background-color: #ffffff;
+}
+
+.posts-wrapper .searchForm {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #474a2c;
+    font-weight: 600;
+}
+
+.posts-wrapper .searchForm .form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1em;
+    align-items: center;
+    height: 70px;
+    justify-content: space-between;
+}
+
+.posts-wrapper .searchForm .form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #b0e298;
+    outline: 0;
+    box-shadow: 0 0 0 3px rgb(176 226 152);
+}
+
+.posts-wrapper .searchForm button.search-button {
+    border-color: #645e9d;
+    color: #645e9d;
+    font-weight: 600;
+    margin: 0 1em;
+}
+
+.posts-wrapper .searchForm button.search-button:hover {
+    border-color: #ffffff;
+    background-color: #645e9d;
+    color: white;
+}
+/* SEARCHFORM */
 
 .posts-wrapper h1 {
     text-align: center;

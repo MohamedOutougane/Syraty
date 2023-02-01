@@ -17,8 +17,12 @@
 
         <div class="posts-wrapper">
 
+        <div>
+            @include('search')
+        </div>
+
             <ul>
-                @foreach ($posts as $post)
+                 @foreach ($posts as $index => $post)
                     <div class="post">
                         <div class="post-entete">
                             <div class="post-title">
@@ -47,7 +51,7 @@
                             </div>
                         </div>
                         <div class="post-content">
-                            @if ($post->id % 2 == 0)
+                            @if ($index % 2 == 0)
                                 <div class="post-body">
                                     {{ $post->body }}
                                 </div>

@@ -39,6 +39,10 @@ a, a:hover, a:focus, a:active {
     text-decoration: none;
     color: inherit;
 }
+ul {
+    margin: 0;
+    padding: 0;
+}
 
 .circle {
     width: 15px;
@@ -69,7 +73,6 @@ a, a:hover, a:focus, a:active {
 /*  HEADER */
 header {
     width: 100%;
-    height: 100px;
     background-color: #fff;
     font-size: 1.25em;
     font-weight: 500;
@@ -80,9 +83,9 @@ header {
 header .header-top {
     display: flex;
     justify-content: space-around;
-    padding: 0 1em;
-    height: 100px;
     align-items: center;
+    padding: 1em;
+    font-variant: all-petite-caps;
 }
 
 header .logo {
@@ -105,17 +108,23 @@ header .navigation ul {
     color: rgb(78, 78, 78);
 }
 
+header .navigation li a {
+    color: #878787;
+}
+
 header .navigation li:hover {
     color: #474a2c;
 }
 
-header li.navigation-selected {
+header .navigation li a:hover {
     color: #474a2c;
 }
 
-header .authentification {
-    width: 21%;
+header li.navigation-selected a{
+    color: #474a2c;
 }
+
+
 
 header .authentification ul {
     display: flex;
@@ -149,7 +158,7 @@ header div.stylised-border {
 /* SEARCHFORM */
 .posts-wrapper {
     width: 90%;
-    padding: 5em;
+    padding: 1em;
     margin: auto;
     display: flex;
     flex-direction: column;

@@ -6,19 +6,19 @@
     </div>
     <div class="navigation">
         <ul>
-            @if (!isset($user_id))
-                <li class="navigation-selected"><a href="{{ route('index') }}">Les autres</a></li>         
+            @if (isset($IAmInTheHomePage))
+                <li class="navigation-selected"><a href="{{ route('index') }}">LES AUTRES</a></li>         
             @else 
-                <li><a href="{{ route('index') }}">Les autres</a></li>
+                <li><a href="{{ route('index') }}">LES AUTRES</a></li>
             @endif
 
-            @if (isset($user_id))
-                <li class="navigation-selected"><a href="{{ route('posts.index') }}">Moi</a></li>
+            @if (!isset($IAmInTheHomePage))
+                <li class="navigation-selected"><a href="{{ route('posts.index') }}">MA BIO</a></li>
             @else 
-                <li><a href="{{ route('posts.index') }}">Moi</a></li>
+                <li><a href="{{ route('posts.index') }}">MA BIO</a></li>
             @endif
 
-            <li><a href="{{ route('posts.index') }}">Contact</a></li>
+            <li><a href="{{ route('posts.index') }}">PROFIL</a></li>
         </ul>
     </div>
     <div class="authentification">

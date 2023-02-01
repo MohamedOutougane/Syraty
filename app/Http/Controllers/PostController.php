@@ -15,7 +15,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         //Si l'utilisateur n'est pas connecté, je le redirige vers la page de connexion
@@ -23,14 +23,49 @@ class PostController extends Controller
             return view('auth.login');
         }
 
-        //Je veux récuperer seulement les posts de l'utilisateurs connecté et les trié par plus récent et les pagineer de 7 en 7
-        $posts = Post::where('user_id', auth()->user()->id)->with('user')->latest()->paginate(7);
+        // si l'url est égale à la route "index" alors je veux que la méthode "indexHome" soit exécutée 
+        if ($request->url() !== null && $request->url() == route('index')) {
+            return $this->indexHome();
+        }
+
 
         //je veux l'id de l'user connecté
         $user_id = auth()->user()->id;
+        
+        
+        // je verifie si l'utilisateur a fait une recherche 
+        if (request()->get('search') || request()->get('start_date') || request()->get('end_date') || request()->get('rating')) {
 
-        $newPost = new Post();
+            // je veux récuperer les posts de l'utilisateur connecté
+            $posts = Post::where('user_id', $user_id)
+              ->where(function ($query) { 
+                $search = request()->get('search');
+                $start_date = request()->get('start_date');
+                $end_date = request()->get('end_date');
+                $rating = request()->get('rating');
+                if ($search) {
+                    $query->where('title', 'like', '%'.$search.'%')
+                        ->orWhere('body', 'like', '%'.$search.'%');
+                }
+                if ($start_date) {
+                    $query->where('created_at', '>=', $start_date);
+                }
+                if ($end_date) {
+                    $query->where('created_at', '<=', $end_date);
+                }
+                if ($rating) {
+                    $query->where('rating_id', $rating);
+                }
+              })->with('user')->latest()->paginate(7);
+        } else {
+            //Je veux récuperer seulement les posts de l'utilisateurs connecté et les trié par plus récent et les pagineer de 7 en 7
+            $posts = Post::where('user_id', auth()->user()->id)->with('user')->latest()->paginate(7);
+        }
+
+        // je veux récuperer toutes les notes
         $ratings = Rating::all();
+        // j'instancie un nouvel article vide pour le formulaire de création d'article
+        $newPost = new Post();
 
         // et les envoie à la vue "posts.index" pour les afficher.
         return view('posts.index', compact('posts', 'newPost', 'ratings', 'user_id'));
@@ -44,8 +79,31 @@ class PostController extends Controller
     public function indexHome()
     {
 
-        //Cette méthode récupère tous les articles de la base de données qui ont la valeur "public" a 1 avec leur user les tris par les pluys récents et les pagine de 7 en 7
-        $posts = Post::where('public', 1)->with('user')->latest()->paginate(7);
+        if (request()->get('search') || request()->get('start_date') || request()->get('end_date') || request()->get('rating')) {
+
+            $posts = Post::where('public', 1)
+              ->where(function ($query) { 
+                $search = request()->get('search');
+                $start_date = request()->get('start_date');
+                $end_date = request()->get('end_date');
+                $rating = request()->get('rating');
+                if ($search) {
+                    $query->where('title', 'like', '%'.$search.'%')
+                        ->orWhere('body', 'like', '%'.$search.'%');
+                }
+                if ($start_date) {
+                    $query->where('created_at', '>=', $start_date);
+                }
+                if ($end_date) {
+                    $query->where('created_at', '<=', $end_date);
+                }
+                if ($rating) {
+                    $query->where('rating_id', $rating);
+                }
+              })->with('user')->latest()->paginate(7);
+        } else {
+            $posts = Post::where('public', 1)->with('user')->latest()->paginate(7);
+        }
 
         //je veux l'id de l'user connecté
         if (auth()->user()) {
@@ -86,13 +144,16 @@ class PostController extends Controller
         $user_id = auth()->user()->id;
 
         // je remplace les espaces par des tirets dans le titre
-        $slug = str_replace(' ', '-', $data['title']);
+        $slug = $user_id . '_' .str_replace(' ', '-', $data['title']);
 
         // je donne un nom à l'image avec le nom de l'utilisateur, le titre de l'article et le timestamp
-        $imageName = $user_id . '_' . $slug . '_' . time() . '.' . $request->image->extension();
-         
-        // je déplace l'image dans le dossier "public/storage" du projet
-        $request->image->move(public_path('storage'), $imageName);
+        if($request->image){
+            $imageName = $slug . '_' . time() . '.' . $request->image->extension();
+            // je déplace l'image dans le dossier "public/storage" du projet
+            $request->image->move(public_path('storage'), $imageName);
+        } else {
+            $imageName = null;
+        }
 
         // définit la valeur de $public si la clé "public" existe dans $data à 1, sinon elle est définie à 0.
         $public = array_key_exists('public', $data) ? 1 : 0;

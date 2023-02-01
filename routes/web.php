@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 // je veux que la route "/" soit gérée par le controller "PostController" et la méthode "indexHome"
 Route::get('/', [PostController::class, 'indexHome'])->name('index');
 
-
-// je veux que la route "/" soit gérée par le controller "PostController" et la méthode "index"
+// je veux que la route "/posts" soit gérée par le controller "PostController" et la méthode "index"
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('auth');
+
 // cette méthode permet de dire que le crud passe par le controller "PostController" excepté la méthode "indexHome"
 Route::resource('posts', PostController::class)->except('indexHome'); // add : " ->middleware('auth'); " to protect the route by authentification
 

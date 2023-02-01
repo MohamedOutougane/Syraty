@@ -17,6 +17,10 @@
 
         <div class="posts-wrapper">
 
+        <div>
+            @include('search')
+        </div>
+
             <div class="posts-creator">
                 <div class="creator-title">
                     Créer un post
@@ -76,7 +80,7 @@
 
             <h1>Mon fil</h1>
             <ul>
-                @foreach ($posts as $post)
+                @foreach ($posts as $index => $post)
                     <div class="post">
                         <div class="post-entete">
                             <div class="post-title">
@@ -107,7 +111,7 @@
                             </div>
                         </div>
                         <div class="post-content">
-                            @if ($post->id % 2 == 0)
+                            @if ($index % 2 == 0)
                                 <div class="post-body">
                                     <a href="{{ route('posts.show', $post->id) }}">
                                         {{ $post->body }}

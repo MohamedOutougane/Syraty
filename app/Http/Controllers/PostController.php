@@ -23,7 +23,7 @@ class PostController extends Controller
             return view('auth.login');
         }
 
-
+        // si l'url est égale à la route "index" alors je veux que la méthode "indexHome" soit exécutée 
         if ($request->url() !== null && $request->url() == route('index')) {
             return $this->indexHome();
         }

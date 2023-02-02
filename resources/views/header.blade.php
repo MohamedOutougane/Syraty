@@ -24,13 +24,13 @@
     <div class="authentification">
         <ul>
             @if (!isset($user_id))
-                <li><a href="{{ route('login') }}">Connexion</a></li>
-                <button class="register-button"><a href="{{ route('register') }}">Inscription</a></button>       
+                <button class="connexion-button"><a href="{{ route('login') }}">Connexion</a></button>
+                <button class="register-button"><a href="{{ route('register') }}">Inscription</a></button>
             @else 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <button type="submit">
+                    <button class="deconnexion-button" type="submit">
                         <li>Déconnexion</li>
                     </button>
                 </form>

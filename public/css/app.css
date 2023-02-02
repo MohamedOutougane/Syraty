@@ -132,16 +132,41 @@ header .authentification ul {
     align-items: center;
 }
 
-header .register-button {
-    background-color: #645e9d;
-    color: #fff;
-    border: none;
+header .authentification ul button {
+    margin: 0 0.3em;
 }
 
-header .register-button:hover {
+header button.register-button {
+    background-color: #645e9d;
+    color: #fff;
+    border: solid 2px #645e9d;
+}
+
+header button.connexion-button {
+    border: solid 2px #b1e29d;
+    background-color: #b1e29d;
+    color: #ffffff;
+}
+
+header button.deconnexion-button {
+    background-color: #474a2e;
+    color: white;
+    border: solid 2px #474a30;
+}
+
+header button.deconnexion-button:hover {
+    background-color: #ffffff;
+    color: #474a30;
+    border: solid 2px #474a30;
+}
+
+header button.register-button:hover {
     background-color: #ffffff;
     color: #645e9d;
-    border: solid 2px #645e9d;
+}
+header button.connexion-button:hover {
+    background-color: white;
+    color: #b1e29d;
 }
 
 header div.stylised-border {
@@ -187,7 +212,7 @@ header div.stylised-border {
     flex-direction: column;
     margin: 0 1em;
     align-items: center;
-    height: 70px;
+    height: 100%;
     justify-content: space-between;
 }
 

@@ -105,9 +105,13 @@ class PostController extends Controller
             $posts = Post::where('public', 1)->with('user')->latest()->paginate(7);
         }
 
+        // je veux savoir si je suis sur la page d'accueil
+        $IAmInTheHomePage = true;
+
         //je veux l'id de l'user connecté
         if (auth()->user()) {
             $user_id = auth()->user()->id;
+            
         } else {
             $user_id = null;
         }
@@ -115,7 +119,7 @@ class PostController extends Controller
         // je récupère tous les ratings
         $ratings = Rating::all();
 
-        return view('index', compact('posts', 'ratings', 'user_id'));
+        return view('index', compact('posts', 'ratings', 'user_id', 'IAmInTheHomePage'));
     }
 
     /**

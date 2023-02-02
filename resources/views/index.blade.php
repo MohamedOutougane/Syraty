@@ -17,11 +17,11 @@
 
         <div class="posts-wrapper">
 
-        <div>
+        <div class="search-container">
             @include('search')
         </div>
 
-            <ul>
+            <div class="posts-fil">
                  @foreach ($posts as $index => $post)
                     <div class="post">
                         <div class="post-entete">
@@ -55,17 +55,15 @@
                                 <div class="post-body">
                                     {{ $post->body }}
                                 </div>
-                                <div class="post-image">
-                                    <a href="{{ route('posts.show', $post->id) }}">
-                                        <img src="{{ asset('storage/' . $post->image) }}" alt="Image de l'article">
-                                    </a>
+                                <div class="line-itsme"> </div>
+                                <div class="post-image fill"
+                                    style="background-image: url('{{ asset('storage/' . $post->image) }}');">
                                 </div>
                             @else
-                                <div class="post-image">
-                                    <a href="{{ route('posts.show', $post->id) }}">
-                                        <img src="{{ asset('storage/' . $post->image) }}" alt="Image de l'article">
-                                    </a>
+                                <div class="post-image fill"
+                                    style="background-image: url('{{ asset('storage/' . $post->image) }}');">
                                 </div>
+                                <div class="line-itsme"> </div>                           
                                 <div class="post-body">
                                     {{ $post->body }}
                                 </div>
@@ -73,7 +71,8 @@
                         </div>
                     </div>
                 @endforeach
-            </ul>
+                <img src="{{ asset('images/navigation.png') }}" "alt="">
+            </div>
 
             <div class="paginator-wrapper">
                 {{ $posts->links() }}

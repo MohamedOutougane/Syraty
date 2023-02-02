@@ -116,17 +116,15 @@
                                         {{ $post->body }}
                                     </a>
                                 </div>
-                                <div class="post-image">
-                                    <a href="{{ route('posts.show', $post->id) }}">
-                                        <img src="{{ asset('storage/' . $post->image) }}" alt="Image de l'article">
-                                    </a>
+                                <div class="line-itsme"> </div>
+                                <div class="post-image fill"
+                                    style="background-image: url('{{ asset('storage/' . $post->image) }}');">
                                 </div>
                             @else
-                                <div class="post-image">
-                                    <a href="{{ route('posts.show', $post->id) }}">
-                                        <img src="{{ asset('storage/' . $post->image) }}" alt="Image de l'article">
-                                    </a>
+                                <div class="post-image fill"
+                                    style="background-image: url('{{ asset('storage/' . $post->image) }}');">
                                 </div>
+                                <div class="line-itsme"> </div>
                                 <div class="post-body">
                                     <a href="{{ route('posts.show', $post->id) }}">
                                         {{ $post->body }}
@@ -143,6 +141,7 @@
                         </form>
                     </div>
                 @endforeach
+                <img src="{{ asset('images/navigation.png') }}" "alt="">
             </div>
 
             <div class="paginator-wrapper">

@@ -78,6 +78,7 @@ header {
     font-weight: 500;
     position: sticky;
     top: 0;
+    z-index: 3;
 }
 
 header .header-top {
@@ -143,20 +144,21 @@ header button.register-button {
 }
 
 header button.connexion-button {
+    background-color: white;
+    color: #b1e29d;
     border: solid 2px #b1e29d;
-    background-color: #b1e29d;
-    color: #ffffff;
+
 }
 
 header button.deconnexion-button {
-    background-color: #474a2e;
-    color: white;
+    background-color: #ffffff;
+    color: #474a30;
     border: solid 2px #474a30;
 }
 
 header button.deconnexion-button:hover {
-    background-color: #ffffff;
-    color: #474a30;
+    background-color: #474a2e;
+    color: white;
     border: solid 2px #474a30;
 }
 
@@ -165,8 +167,9 @@ header button.register-button:hover {
     color: #645e9d;
 }
 header button.connexion-button:hover {
-    background-color: white;
-    color: #b1e29d;
+    border: solid 2px #b1e29d;
+    background-color: #b1e29d;
+    color: #ffffff;
 }
 
 header div.stylised-border {
@@ -238,14 +241,39 @@ header div.stylised-border {
 }
 /* SEARCHFORM */
 
+.posts-creator {
+    position: relative;
+    z-index: 4;
+    background-color: white;
+}
+
+
 .posts-wrapper h1 {
     text-align: center;
+}
+
+.posts-fil {
+    width: 90%;
 }
 
 .posts-wrapper .post {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.post-entete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 4px #b1e29d;
+    border-radius: 1em;
+    padding: 0.5em 2em;
+    font-weight: 500;
+    color: #474a2e;
+    position: relative;
+    z-index: 2;
+    background-color: white;
 }
 
 .posts-wrapper .post-title {
@@ -255,14 +283,64 @@ header div.stylised-border {
 .posts-wrapper .post-content {
     display: flex;
     justify-content: space-between;
-    height: 250px;
+    height: 330px;
+    width: 100%;
 }
 
 .posts-wrapper .post-image, .posts-wrapper .post-body {
-    width: 50%;
+    width: 45%;
     padding: 1em;
     display: flex;
     justify-content: center;
+    border: solid 2px #645d9a;
+    border-radius: 1em;
+    margin: 1em 1em 4em;
+}
+
+.posts-wrapper .post-image{
+    padding: 0;
+}
+
+.post-image.fill {
+    background-size: cover;
+    background-position: center;
+}
+
+.post-delete-button {
+    position: relative;
+    z-index: 2;
+    background-color: white;
+}
+
+.post-delete-button button {
+    color: red;
+    margin: 0;
+    position: relative;
+    top: -45px;
+    border: solid 2px red;
+    z-index: 2;
+}
+
+
+
+.post-delete-button button:hover {
+    background-color: red;
+    color: white;
+}
+
+.line-itsme {
+    width: 4px;
+    height: 100%;
+    background-color: #b1e29d;
+}
+
+.posts-fil img {
+    height: 26px;
+    position: fixed;
+    bottom: 50%;
+    margin: auto;
+    left: calc(50% - 13px);
+    z-index: 1;
 }
 
 .post-image img {

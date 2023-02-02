@@ -245,6 +245,15 @@ header div.stylised-border {
     position: relative;
     z-index: 4;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form.form-action-post {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 

@@ -18,9 +18,9 @@
             <div>
                 <a href="/">
                     <!-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> -->
-                    <!-- ajout logo ItsMe -->
-                    <img src="{{ asset('images/logoItsMe.png') }}" alt="ItsMe" style="width: 60px;">
-                    <!-- ajout logo ItsMe -->
+                    <!-- ajout logo syraty -->
+                    <img src="{{ asset('images/logosyraty.png') }}" alt="syraty" style="width: 60px;">
+                    <!-- ajout logo syraty -->
                 </a>
             </div>
 

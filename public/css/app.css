@@ -292,7 +292,6 @@ form.form-action-post {
 .posts-wrapper .post-content {
     display: flex;
     justify-content: space-between;
-    height: 330px;
     width: 100%;
 }
 
@@ -313,6 +312,7 @@ form.form-action-post {
 .post-image.fill {
     background-size: cover;
     background-position: center;
+    min-height: 250px;
 }
 
 .post-delete-button {
@@ -339,11 +339,10 @@ form.form-action-post {
 
 .line-itsme {
     width: 4px;
-    height: 100%;
     background-color: #b1e29d;
 }
 
-.posts-fil img {
+.posts-fil .navigationImg {
     height: 26px;
     position: fixed;
     bottom: 50%;

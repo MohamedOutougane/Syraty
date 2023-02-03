@@ -71,7 +71,7 @@
                         </div>
                     </div>
                 @endforeach
-                <img src="{{ asset('images/navigation.png') }}" "alt="">
+                <img class="navigationImg" src="{{ asset('images/navigation.png') }}" "alt="">
             </div>
 
             <div class="paginator-wrapper">

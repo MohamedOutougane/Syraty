@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css" integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <title>Accueil - ItsMe</title>
+        <title>Accueil - syraty</title>
     </head>
     <body>
         <header>
@@ -55,7 +55,7 @@
                                 <div class="post-body">
                                     {{ $post->body }}
                                 </div>
-                                <div class="line-itsme"> </div>
+                                <div class="line-syraty"> </div>
                                 <div class="post-image fill"
                                     style="background-image: url('{{ asset('storage/' . $post->image) }}');">
                                 </div>
@@ -63,7 +63,7 @@
                                 <div class="post-image fill"
                                     style="background-image: url('{{ asset('storage/' . $post->image) }}');">
                                 </div>
-                                <div class="line-itsme"> </div>                           
+                                <div class="line-syraty"> </div>                           
                                 <div class="post-body">
                                     {{ $post->body }}
                                 </div>
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                 @endforeach
-                <img src="{{ asset('images/navigation.png') }}" "alt="">
+                <img class="navigationImg" src="{{ asset('images/navigation.png') }}" "alt="">
             </div>
 
             <div class="paginator-wrapper">

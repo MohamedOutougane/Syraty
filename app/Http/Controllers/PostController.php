@@ -147,8 +147,11 @@ class PostController extends Controller
         //je veux l'id de l'user connecté
         $user_id = auth()->user()->id;
 
+        // je remplace les apostrophes par des tirets dans le titre
+        $titleForSlug = str_replace("'", '-', $data['title']);
+
         // je remplace les espaces par des tirets dans le titre
-        $slug = $user_id . '_' .str_replace(' ', '-', $data['title']);
+        $slug = $user_id . '_' .str_replace(' ', '-', $titleForSlug);
 
         // je donne un nom à l'image avec le nom de l'utilisateur, le titre de l'article et le timestamp
         if($request->image){

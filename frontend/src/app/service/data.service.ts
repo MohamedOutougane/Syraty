@@ -8,6 +8,6 @@ export class DataService {
 
   constructor(private httpClient: HttpClient) { }
   getData() {
-    return this.httpClient.get('https://127.0.0.1:8000/api/posts');
+    return this.httpClient.get('http://127.0.0.1:8000/api/posts');
   }
 }

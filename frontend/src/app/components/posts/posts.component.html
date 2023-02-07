@@ -1,1 +1,74 @@
 <p>posts works!</p>
+
+<div class="posts-wrapper">
+
+    <div class="search-container">
+    </div>
+
+        <div class="posts-creator">
+            <div class="creator-title">
+                Créer un post
+            </div>
+            <div class="form-container">
+                <form action="  'posts.store'  " method="post" class ="form-action-post" enctype="multipart/form-data">
+
+                    <button type="submit">Poster</button>
+                </form>
+            </div>
+
+            
+            <div class="creator-button">
+                <button><i class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
+
+        <div class="posts-fil">
+                <div class="post">
+                    <div *ngFor="let post of posts">
+                        <div>{{post.id}}</div>
+                        <div>{{post.title}}</div>
+                    </div>
+                    <div class="post-entete">
+                        <div class="post-title">
+                            <a href=" 'posts.show', $post->id ">
+                            </a>
+                        </div>
+                        <div class="post-rating">
+                                    <div class="circle red"></div>
+                                    <div class="circle orange"></div>
+                                    <div class="circle yellow"></div>
+                                    <div class="circle green"></div>
+                                    <div class="circle blue"></div>
+                                    <div class="circle grey"></div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                            <div class="post-body">
+                                <a href=" 'posts.show', $post->id ">
+                                </a>
+                            </div>
+                            <div class="line-syraty"> </div>
+                            <div class="post-image fill"
+                                style="background-image: url'asset'storage/' . $post->image ';">
+                            </div>
+                            <div class="post-image fill"
+                                style="background-image: url'asset'storage/' . $post->image ';">
+                            </div>
+                            <div class="line-syraty"> </div>
+                            <div class="post-body">
+                                <a href=" 'posts.show', $post->id ">
+                                </a>
+                            </div>
+                    </div>
+                    <form action=" 'posts.destroy', $post" method="post">
+                        <div class="post-delete-button">
+                            <button>Supprimer</button>
+                        </div>
+                    </form>
+                </div>
+            <img class="navigationImg" src=" asset'images/navigation.png' " alt="bvbv">
+        </div>
+
+        <div class="paginator-wrapper">
+        </div>
+    </div>

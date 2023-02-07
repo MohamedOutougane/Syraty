@@ -234,4 +234,12 @@ class PostController extends Controller
         // je redirige vers la page d'accueil
         return redirect()->route('posts.index');
     }
+
+    //fonction qui récupère les articles pour l'Api
+    public function getPosts()
+    {
+        $posts = Post::all();
+
+        return response()->json($posts, 200);
+    }
 }

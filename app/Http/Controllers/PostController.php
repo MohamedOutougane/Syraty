@@ -239,7 +239,103 @@ class PostController extends Controller
     public function getPosts()
     {
         $posts = Post::all();
-
         return response()->json($posts, 200);
+    }
+
+    //fonction qui récupère un article par son id pour l'Api
+    public function getPostById($id)
+    {
+        $postById = Post::find($id);
+        if(is_null($postById)){
+            return response()->json(['message' => 'Post not found'], 404);
+        } else {
+            return response()->json($postById, 200);
+        }
+    }
+
+    // fonction qui ajoute un article
+    public function addPost(Request $request)
+    {
+        // $post = Post::create($request->all());
+
+        //je veux l'id de l'user connecté
+        // $user_id = auth()->user()->id;
+        $user_id = 11;
+
+
+        // je récupère les données du formulaire
+        $data = $request->all();
+
+        // je remplace les apostrophes par des tirets dans le titre
+        $titleForSlug = str_replace("'", '-', $data['title']);
+
+        // je remplace les espaces par des tirets dans le titre
+        $slug = $user_id . '_' .str_replace(' ', '-', $titleForSlug);
+
+        // je donne un nom à l'image avec le nom de l'utilisateur, le titre de l'article et le timestamp
+        if($request->image){
+            $imageName = $slug . '_' . time() . '.' . $request->image->extension();
+            // je déplace l'image dans le dossier "public/storage" du projet
+            $request->image->move(public_path('storage'), $imageName);
+        } else {
+            $imageName = null;
+        }
+
+        // définit la valeur de $public si la clé "public" existe dans $data à 1, sinon elle est définie à 0.
+        $public = array_key_exists('public', $data) ? 1 : 0;
+
+        // je crée un nouvel article avec les données du formulaire
+        $post = Post::create([
+            'title' => $data['title'],
+            'body' => $data['body'],
+            'image' => $imageName,
+            'rating_id' => $data['rating_id'],
+            'public' => $public,
+            'slug' => $slug,
+            'user_id' => $user_id
+        ])->saveOrFail(); // si l'article n'est pas créé, une erreur est renvoyée
+
+        return response($post, 201);
+    }
+
+    // // fonction qui modifie un article
+    // public function updatePost(Request $request, $id)
+    // {
+    //     $post = Post::find($id);
+    //     if(is_null($post)){
+    //         return response()->json(['message' => 'Post not found'], 404);
+    //     } else {
+
+    //         // je mets a jour mon article seulment si il y a des valeurs modifé dans la requete sinon je garde les originaux
+    //         $post = $post->update([
+    //             'title' => $request->title ? $request->title : $post->title,
+    //             'body' => $request->body ? $request->body : $post->body,
+    //             'image' => $request->image ? $request->image : $post->image,
+    //             'rating_id' => $request->rating_id ? $request->rating_id : $post->rating_id,
+    //             'public' => $request->public ? $request->public : $post->public,
+    //             'slug' => $request->slug ? $request->slug : $post->slug,
+    //             'user_id' => $request->user_id ? $request->user_id : $post->user_id
+    //         ]);
+
+    //         return response($post, 200);
+    //     }
+    // }
+
+    // fonction qui supprime un article
+    public function deletePost($id)
+    {
+        $post = Post::find($id);
+        if(is_null($post)){
+            return response()->json(['message' => 'Post not found'], 404);
+        } else {
+
+            //je supprime l'image de l'article
+            if($post->image){
+                unlink(public_path('storage/' . $post->image));
+            }
+
+            $post->delete();
+            return response()->json(null, 204);
+        }
     }
 }

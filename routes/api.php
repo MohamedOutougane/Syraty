@@ -21,3 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // récuperer tout les posts
 Route::get('posts', [PostController::class, 'getPosts']);
+
+// récuperer tout les posts correspondant à l'id
+Route::get('post/{id}', [PostController::class, 'getPostById']);
+
+// créer un post
+Route::post('addPost', [PostController::class, 'addPost']);
+
+// supprimer un post
+Route::delete('deletePost/{id}', [PostController::class, 'deletePost']);
+
+// // modifier un post
+// Route::put('updatePost/{id}', [PostController::class, 'updatePost']);

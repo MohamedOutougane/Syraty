@@ -19,6 +19,7 @@ export class PostsComponent implements OnInit {
     console.log('liste des posts');
     this.dataService.getData().subscribe(res => {
       console.log(res);
+      this.posts = res;
     });
   }
 }

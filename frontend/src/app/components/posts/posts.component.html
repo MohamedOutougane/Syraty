@@ -1,5 +1,3 @@
-<p>posts works!</p>
-
 <div class="posts-wrapper">
 
     <div class="search-container">
@@ -72,7 +70,7 @@
                 <div *ngIf="index % 2 == 0; then thenBlock else elseBlock"></div>
                 <ng-template #thenBlock>
                     <div class="post-body">
-                        {{post.body}}
+                        <p>{{post.body}}</p>
                     </div>
                     <div class="line-syraty"> </div>
                     <div class="post-image fill" style="background-image: url({{path}}/{{post.image}});">
@@ -83,7 +81,7 @@
                     </div>
                     <div class="line-syraty"> </div>
                     <div class="post-body">
-                        {{post.body}}
+                        <p>{{post.body}}</p>
                     </div>
                 </ng-template>
             </div>

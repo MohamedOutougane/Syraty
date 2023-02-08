@@ -305,6 +305,10 @@ form.form-action-post {
     margin: 1em 1em 4em;
 }
 
+.posts-wrapper p {
+    word-break: break-all;
+}
+
 .posts-wrapper .post-image{
     padding: 0;
 }

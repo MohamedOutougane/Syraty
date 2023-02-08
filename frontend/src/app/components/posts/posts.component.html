@@ -27,7 +27,7 @@
                     <label for="image">
                         Choisissez une image
                     </label>
-                    <input enctype="multipart/form-data" type="file" name="image" id="inputImage" class="form-control" #imageInput (change)="processFile(imageInput)">
+                    <input enctype="multipart/form-data" type="file" name="image" id="inputImage" class="form-control" (change)="processFile($event)">
                 </div>
                 <div class="form-group">
                     <label for="title">

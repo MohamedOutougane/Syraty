@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
 import { Post } from 'src/app/post';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-posts',
@@ -34,18 +35,29 @@ export class PostsComponent implements OnInit {
       this.ratings = res.ratings;
     });
   }
-  processFile(imageInput: any) {
-    const file = imageInput.files[0];
+  processFile(event: Event) {
+    const file = (event.target as HTMLInputElement)?.files?.[0];
     this.imageFile = file;
   }
   insertData() {
+    const formData: any = new FormData();
+    formData.append("image", this.imageFile);
+    formData.append("title", this.post.title);
+    formData.append("body", this.post.body);
+    formData.append("rating_id", this.post.rating_id);
+    formData.append("public", this.post.public);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'multipart/form-data'
+      })
+    };
     console.log('insertion d\'un post');
     // this.post.image = file;
     console.log(this.post.image);
     console.log(this.post);
     console.log(this.imageFile);
     this.post.image = this.imageFile;
-    this.dataService.insertData(this.post).subscribe(res => {
+    this.dataService.insertData(formData, httpOptions).subscribe(res => {
       console.log(res);
       // this.posts = res;
       this.getPostsData();

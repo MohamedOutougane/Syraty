@@ -11,7 +11,7 @@ export class DataService {
   getData() {
     return this.httpClient.get('http://127.0.0.1:8000/api/posts');
   }
-  insertData(data:Post) {
+  insertData(data:Post, httpOptions:any) {
     console.log('http://127.0.0.1:8000/api/addPost', data);
     return this.httpClient.post('http://127.0.0.1:8000/api/addPost', data);
   }

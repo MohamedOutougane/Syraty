@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { DataService } from '../../service/data.service';
 import { Post } from 'src/app/post';
 import { HttpHeaders } from '@angular/common/http';
@@ -15,12 +15,24 @@ export class PostsComponent implements OnInit {
   assetPath: any;
   post=new Post();
   imageFile: File | undefined;
+  formContainer: any;
+  button: any;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
     this.getPostsData();
     this.getRatingsData();
+    this.showHideForm();
+  }
+
+  showHideForm() {
+    this.formContainer = this.elementRef.nativeElement.querySelector('.form-container');
+    this.button = this.elementRef.nativeElement.querySelector('.creator-button button');
+    this.formContainer.style.display = 'none';
+    this.button.addEventListener('click', () => {
+      this.formContainer.style.display = this.formContainer.style.display === 'none' ? 'block' : 'none';
+    });
   }
 
   getPostsData() {

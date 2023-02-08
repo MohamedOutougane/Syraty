@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
+import { Post } from 'src/app/post';
 
 @Component({
   selector: 'app-posts',
@@ -9,6 +10,7 @@ import { DataService } from '../../service/data.service';
 export class PostsComponent implements OnInit {
   posts: any;
   ratings: any;
+  post=new Post();
 
   constructor(private dataService: DataService) { }
 
@@ -33,6 +35,7 @@ export class PostsComponent implements OnInit {
   }
   insertData() {
     console.log('insertion d\'un post');
+    console.log(this.post);
     // this.dataService.insertData().subscribe(res => {
     //   console.log(res);
     //   this.posts = res;

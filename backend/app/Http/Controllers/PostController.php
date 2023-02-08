@@ -238,8 +238,12 @@ class PostController extends Controller
     //fonction qui récupère les articles pour l'Api
     public function getPosts()
     {
+        $ratings = Rating::all();
         $posts = Post::all();
-        return response()->json($posts, 200);
+        return response()->json([
+            'posts' => $posts,
+            'ratings' => $ratings
+        ], 200);
     }
 
     //fonction qui récupère un article par son id pour l'Api

@@ -75,11 +75,11 @@
                         {{post.body}}
                     </div>
                     <div class="line-syraty"> </div>
-                    <div class="post-image fill" style="background-image: url'asset'storage/' . $post->image ';">
+                    <div class="post-image fill" style="background-image: url({{path}}/{{post.image}});">
                     </div>
                 </ng-template>
                 <ng-template #elseBlock>
-                    <div class="post-image fill" style="background-image: url'asset'storage/' . $post->image ';">
+                    <div class="post-image fill" style="background-image: url({{path}}/{{post.image}});">
                     </div>
                     <div class="line-syraty"> </div>
                     <div class="post-body">
@@ -93,7 +93,7 @@
                 </div>
             </form>
         </div>
-        <img class="navigationImg" src=" asset'images/navigation.png' " alt="bvbv">
+        <img class="navigationImg" src="{{assetPath}}/navigation.png" alt="bvbv">
     </div>
 
     <div class="paginator-wrapper">

@@ -11,6 +11,8 @@ import { HttpHeaders } from '@angular/common/http';
 export class PostsComponent implements OnInit {
   posts: any;
   ratings: any;
+  path: any;
+  assetPath: any;
   post=new Post();
   imageFile: File | undefined;
 
@@ -26,6 +28,10 @@ export class PostsComponent implements OnInit {
     this.dataService.getData().subscribe((res: any) => {
       console.log(res.posts);
       this.posts = res.posts;
+
+      this.path = "http://127.0.0.1:8000/storage"
+      this.assetPath = "http://127.0.0.1:8000/images"
+
     });
   }
   getRatingsData() {
@@ -35,6 +41,7 @@ export class PostsComponent implements OnInit {
       this.ratings = res.ratings;
     });
   }
+
   processFile(event: Event) {
     const file = (event.target as HTMLInputElement)?.files?.[0];
     this.imageFile = file;

@@ -239,7 +239,7 @@ class PostController extends Controller
     public function getPosts()
     {
         $ratings = Rating::all();
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'desc')->get();
         return response()->json([
             'posts' => $posts,
             'ratings' => $ratings

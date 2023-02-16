@@ -7,6 +7,8 @@ use App\Models\Rating;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class PostController extends Controller
 {
@@ -23,7 +25,7 @@ class PostController extends Controller
             return view('auth.login');
         }
 
-        // si l'url est égale à la route "index" alors je veux que la méthode "indexHome" soit exécutée 
+        // si l'url est égale à la route "index" alors je veux que la méthode "indexHome" soit exécutée
         if ($request->url() !== null && $request->url() == route('index')) {
             return $this->indexHome();
         }
@@ -31,14 +33,14 @@ class PostController extends Controller
 
         //je veux l'id de l'user connecté
         $user_id = auth()->user()->id;
-        
-        
-        // je verifie si l'utilisateur a fait une recherche 
+
+
+        // je verifie si l'utilisateur a fait une recherche
         if (request()->get('search') || request()->get('start_date') || request()->get('end_date') || request()->get('rating')) {
 
             // je veux récuperer les posts de l'utilisateur connecté
             $posts = Post::where('user_id', $user_id)
-              ->where(function ($query) { 
+              ->where(function ($query) {
                 $search = request()->get('search');
                 $start_date = request()->get('start_date');
                 $end_date = request()->get('end_date');
@@ -82,7 +84,7 @@ class PostController extends Controller
         if (request()->get('search') || request()->get('start_date') || request()->get('end_date') || request()->get('rating')) {
 
             $posts = Post::where('public', 1)
-              ->where(function ($query) { 
+              ->where(function ($query) {
                 $search = request()->get('search');
                 $start_date = request()->get('start_date');
                 $end_date = request()->get('end_date');
@@ -111,7 +113,7 @@ class PostController extends Controller
         //je veux l'id de l'user connecté
         if (auth()->user()) {
             $user_id = auth()->user()->id;
-            
+
         } else {
             $user_id = null;
         }
@@ -235,11 +237,101 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
+    //fonction qui connecte l'utilisateur
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return response()->json([
+                'message' => 'Vous êtes connecté !'
+            ], 200);
+        }
+
+        return response()->json([
+            'message' => 'Les identifiants sont incorrects.'
+        ], 401);
+    }
+
+    //fonction qui récupère les articles pour l'Api
+    public function getUserPosts($id)
+    {
+
+        $user_id = $id;
+
+        $ratings = Rating::all();
+        $posts = Post::where('user_id', $user_id)->orderBy('id', 'desc')->get();
+        return response()->json([
+            'posts' => $posts,
+            'ratings' => $ratings
+        ], 200);
+    }
+
     //fonction qui récupère les articles pour l'Api
     public function getPosts()
     {
+
+
         $ratings = Rating::all();
-        $posts = Post::orderBy('id', 'desc')->get();
+        $posts = Post::where('public', 1)->with('user')->orderBy('id', 'desc')->get();
+        return response()->json([
+            'posts' => $posts,
+            'ratings' => $ratings
+        ], 200);
+    }
+
+    //fonction qui récupère les artciles de la recglette pour l'Api
+
+    /**
+     * @throws NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     */
+    public function getPostsBySearch(Request $request)
+    {
+
+        $data = $request->all();
+
+        if (request()->get('search') || request()->get('start_date') || request()->get('end_date') || request()->get('rating')) {
+
+            $posts = Post::where(function ($query) {
+                $search = request()->get('search'); // $search
+                $start_date = request()->get('start_date');
+                $end_date = request()->get('end_date');
+                $rating = request()->get('rating');
+                if ($search) {
+                    $query->where('title', 'like', '%'.$search.'%')
+                        ->orWhere('body', 'like', '%'.$search.'%');
+                }
+                if ($start_date) {
+                    $query->where('created_at', '>=', $start_date);
+                }
+                if ($end_date) {
+                    $query->where('created_at', '<=', $end_date);
+                }
+                if ($rating) {
+                    $query->where('rating_id', $rating);
+                }
+            });
+                if( null == request()->get('user_id') ){
+                    $posts = $posts->where('public', 1)->with('user')->orderBy('id', 'desc')->get();
+                } else {
+                    $posts = $posts->where('user_id', request()->get('user_id'))->with('user')->orderBy('id', 'desc')->get();
+                }
+              
+        } else {
+            if( null == request()->get('user_id') ){
+                $posts = Post::where('public', 1)->with('user')->orderBy('id', 'desc')->get();
+            } else {
+                $posts = Post::where('user_id', request()->get('user_id'))->with('user')->orderBy('id', 'desc')->get();
+            }
+            // $posts = Post::where('public', 1)->with('user')->orderBy('id', 'desc')->get();
+        }
+
+        // $data = $request->all();
+        $ratings = Rating::all();
+        // $posts = Post::where('public', 1)->where('title', 'like', '%' . $data['search'] . '%')->with('user')->orderBy('id', 'desc')->get();
         return response()->json([
             'posts' => $posts,
             'ratings' => $ratings
@@ -264,7 +356,8 @@ class PostController extends Controller
 
         //je veux l'id de l'user connecté
         // $user_id = auth()->user()->id;
-        $user_id = 11;
+        $user_id = request()->get('user_id');
+        // $user_id = 11;
 
 
         // je récupère les données du formulaire

@@ -1,0 +1,194 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    /* font-family: 'Roboto', sans-serif; */
+    font-size: 16px;
+    color: #000;
+    background-color: #fff;
+}
+
+
+/* COMMON ELEMENTS */
+button {
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: solid 2px #000;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+}
+.circle.red{
+    background-color: #860000;
+}
+.circle.orange{
+    background-color: #ff8800;
+}
+.circle.yellow{
+    background-color: #ffd000;
+}
+.circle.green{
+    background-color: #00ff15;
+}
+.circle.blue{
+    background-color: #00aeff;
+}
+.circle.gray{
+    background-color: #646464;
+}
+/* COMMON ELEMENTS */
+
+
+
+.posts-creator {
+    position: relative;
+    z-index: 4;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form.form-action-post {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+
+h1 {
+    text-align: center;
+}
+
+.posts-fil {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin: auto;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-entete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 4px #b1e29d;
+    border-radius: 1em;
+    padding: 0.5em 2em;
+    font-weight: 500;
+    color: #474a2e;
+    position: relative;
+    z-index: 2;
+    background-color: white;
+}
+
+.post-title {
+    font-size: 1.2em;
+}
+
+.post-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.post-image, .post-body {
+    width: 45%;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    border: solid 2px #645d9a;
+    border-radius: 1em;
+    margin: 1em 1em 4em;
+}
+
+p {
+    text-align: justify;
+}
+.post-image{
+    padding: 0;
+}
+
+.post-image.fill {
+    background-size: cover;
+    background-position: center;
+    min-height: 250px;
+}
+
+.post-delete-button {
+    position: relative;
+    z-index: 2;
+    background-color: white;
+}
+
+.post-delete-button button {
+    color: red;
+    margin: 0;
+    position: relative;
+    top: -45px;
+    border: solid 2px red;
+    z-index: 2;
+}
+
+
+
+.post-delete-button button:hover {
+    background-color: red;
+    color: white;
+}
+
+.line-syraty {
+    width: 4px;
+    background-color: #b1e29d;
+}
+
+.posts-fil .navigationImg {
+    height: 26px;
+    position: sticky;
+    bottom: 50%;
+    margin: auto;
+    z-index: 1;
+}
+
+.post-image img {
+    max-height: 100%;
+    max-width: 100%;
+}

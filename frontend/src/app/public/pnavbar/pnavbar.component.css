@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    /* font-family: 'Roboto', sans-serif; */
+    font-size: 16px;
+    color: #000;
+    background-color: #fff;
+}
+
+
+/* COMMON ELEMENTS */
+button {
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: solid 2px #000;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1em;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    justify-content: space-between;
+}
+
+ul.nav-list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user-section {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 2em;
+}
+
+li.nav-li {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+a.nav-a {
+    padding: 0.5em;
+    margin: 0.5em;
+    border-radius: 0.3em;
+
+}
+
+a.nav-a.button {
+    border: solid #b0e298;
+    display: block;
+    text-align: center;
+    font-size: 1.1em;
+    color: #4aab1b;
+    font-weight: 500;
+    width: 80%;
+    margin: auto;
+}
+
+a.nav-a.button:hover {
+    background-color: #b0e298;
+    cursor: pointer;
+}
+
+a.nav-a.active {
+    background-color: #645e9d;
+    color: white;
+    font-weight: 600;
+}
+
+a.nav-a:hover {
+    background-color: #645e9d;
+    color: white;
+}
+
+img.logoImg {
+    width: 33%;
+    height: 100px;
+    margin: auto;
+    align-self: center;
+    display: block;
+}

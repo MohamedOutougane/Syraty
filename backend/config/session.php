@@ -156,6 +156,7 @@ return [
     */
 
     'domain' => env('SESSION_DOMAIN'),
+    // 'domain' => '.domain.com', // j'ai ajouté cette ligne pour la connexion a l'api
 
     /*
     |--------------------------------------------------------------------------

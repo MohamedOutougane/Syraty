@@ -1,7 +1,13 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { DataService } from '../../service/data.service';
+import { DataService } from '../../_service/data.service';
 import { Post } from 'src/app/post';
 import { HttpHeaders } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { TokenService } from 'src/app/_service/token.service';
+import { SearchFormComponent } from 'src/app/public/search-form/search-form.component';
+import { PnavbarComponent } from '../pnavbar/pnavbar.component';
+import { SearchPostsService } from 'src/app/_service/search-posts.service';
+import { searchResults } from 'src/app/_service/data.service';
 
 @Component({
   selector: 'app-posts',
@@ -17,13 +23,51 @@ export class PostsComponent implements OnInit {
   imageFile: File | undefined;
   formContainer: any;
   button: any;
+  userLogged: any;
+  userLoggedId: any;
+  postsSearched: any;
+  page: any;
 
-  constructor(private dataService: DataService, private elementRef: ElementRef) { }
+  constructor(
+    private dataService: DataService, 
+    private elementRef: ElementRef, 
+    private activated: ActivatedRoute, 
+    private tokenService: TokenService,
+    private pnavbarComponent: PnavbarComponent,
+    private searchFormService: SearchPostsService
+  ) { }
 
   ngOnInit(): void {
+    this.getUserLoggedId();
     this.getPostsData();
     this.getRatingsData();
     this.showHideForm();
+    this.activated.data.subscribe((data: any) => {
+      console.log(data);
+    });
+    this.getSearchedPosts();
+    searchResults.subscribe((results) => {
+      console.log('the results are : ' + JSON.stringify(results))
+      // const resultsArray = Object.keys(results).map((key) => ({
+      //   id: key,
+      //   ...results[key],
+      // }));
+      this.posts = results.posts;
+      this.ratings = results.ratings;
+    });
+  }
+
+  
+
+  getSearchedPosts() {
+    this.postsSearched = this.searchFormService.giveSearchedData();
+    console.log('the posts searched are : ' + this.postsSearched);
+  }
+
+  getUserLoggedId() {
+    this.userLogged = this.tokenService.getUserLogged();
+    this.userLoggedId = this.userLogged.id;
+    console.log('the user logged is : ' + this.userLoggedId);
   }
 
   showHideForm() {
@@ -36,8 +80,9 @@ export class PostsComponent implements OnInit {
   }
 
   getPostsData() {
+    let userLoggedId = this.userLoggedId;
     console.log('liste des posts');
-    this.dataService.getData().subscribe((res: any) => {
+    this.dataService.getData(this.userLoggedId).subscribe((res: any) => {
       console.log(res.posts);
       this.posts = res.posts;
 
@@ -48,7 +93,7 @@ export class PostsComponent implements OnInit {
   }
   getRatingsData() {
     console.log('liste des ratings');
-    this.dataService.getData().subscribe((res: any) => {
+    this.dataService.getData(this.userLoggedId).subscribe((res: any) => {
       console.log(res.ratings);
       this.ratings = res.ratings;
     });
@@ -60,6 +105,7 @@ export class PostsComponent implements OnInit {
   }
   insertData() {
     const formData: any = new FormData();
+    formData.append("user_id", this.userLoggedId);
     formData.append("image", this.imageFile);
     formData.append("title", this.post.title);
     formData.append("body", this.post.body);
@@ -85,7 +131,15 @@ export class PostsComponent implements OnInit {
   deleteData(id: any) {
     console.log(id);
     console.log('suppression d\'un post');
-    this.dataService.deleteData(id).subscribe(res => {
+    // je veux envoyer mon bearer token dans la requête
+    
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.tokenService.getToken()}`
+      })
+    };
+    this.dataService.deleteData(id, httpOptions).subscribe(res => {
       console.log(res);
       this.getPostsData();
     });

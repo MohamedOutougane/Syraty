@@ -1,0 +1,25 @@
+<div class="search-container">
+    <form class="searchForm" #searchForm="ngForm" (ngSubmit)="search(searchForm)">
+        <div class="form-group">
+            <label for="search">Que recherchez vous?</label>
+            <input type="text" name="search" [(ngModel)]="query" class="form-control"
+                placeholder="Mes vacances en Italie">
+        </div>
+        <div class="form-group">
+            <label for="start_date">Date de début :</label>
+            <input type="date" class="form-control" name="start_date" [(ngModel)]="startDate">
+        </div>
+        <div class="form-group">
+            <label for="end_date">Date de fin :</label>
+            <input type="date" class="form-control" name="end_date" [(ngModel)]="endDate">
+        </div>
+        <div class="form-group">
+            <label for="rating">Ce jour était</label>
+            <select name="rating" [(ngModel)]="selectedRating" class="form-control">
+                <option value="">Toutes les notes</option>
+                <option *ngFor="let rating of ratings" [value]="rating.id">{{rating.name}}</option>
+            </select>
+        </div>
+        <button type="submit" class="search-button">Rechercher</button>
+    </form>
+</div>

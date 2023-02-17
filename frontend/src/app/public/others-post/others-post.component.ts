@@ -17,31 +17,27 @@ export class OthersPostComponent {
   path: any;
   assetPath: any;
   page: any;
+  serverPath = "http://127.0.0.1:8000/";
 
   constructor(private dataService: DataService, private activated: ActivatedRoute, private tokenService: TokenService) { }
 
   ngOnInit(): void {
     this.getPostsData();
-    this.activated.data.subscribe((data: any) => {
-      console.log(data);
-    });
+
+    // je recupere les posts de la recherche
     searchResults.subscribe((results) => {
-      console.log('the results are : ' + JSON.stringify(results))
-      // const resultsArray = Object.keys(results).map((key) => ({
-      //   id: key,
-      //   ...results[key],
-      // }));
       this.posts = results.posts;
       this.ratings = results.ratings;
     });
   }
 
+  //  je récuperes les posts public et je les affiches
   getPostsData() {
     this.dataService.getPublicData().subscribe((res: any) => {
       this.posts = res.posts;
 
-      this.path = "http://127.0.0.1:8000/storage"
-      this.assetPath = "http://127.0.0.1:8000/images"
+      this.path = this.serverPath + "storage";
+      this.assetPath = this.serverPath + "images";
     });
   }
 }

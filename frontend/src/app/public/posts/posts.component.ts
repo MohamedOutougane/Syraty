@@ -2,11 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { DataService } from '../../_service/data.service';
 import { Post } from 'src/app/post';
 import { HttpHeaders } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
 import { TokenService } from 'src/app/_service/token.service';
-import { SearchFormComponent } from 'src/app/public/search-form/search-form.component';
-import { PnavbarComponent } from '../pnavbar/pnavbar.component';
-import { SearchPostsService } from 'src/app/_service/search-posts.service';
 import { searchResults } from 'src/app/_service/data.service';
 
 @Component({
@@ -29,14 +25,12 @@ export class PostsComponent implements OnInit {
   page: any;
   showFormButton: any;
   hideFormButton: any;
+  serverPath = "http://127.0.0.1:8000/";
 
   constructor(
     private dataService: DataService, 
-    private elementRef: ElementRef, 
-    private activated: ActivatedRoute, 
-    private tokenService: TokenService,
-    private pnavbarComponent: PnavbarComponent,
-    private searchFormService: SearchPostsService
+    private elementRef: ElementRef,
+    private tokenService: TokenService
   ) { }
 
   ngOnInit(): void {
@@ -44,34 +38,19 @@ export class PostsComponent implements OnInit {
     this.getPostsData();
     this.getRatingsData();
     this.showHideForm();
-    this.activated.data.subscribe((data: any) => {
-      console.log(data);
-    });
-    this.getSearchedPosts();
     searchResults.subscribe((results) => {
-      console.log('the results are : ' + JSON.stringify(results))
-      // const resultsArray = Object.keys(results).map((key) => ({
-      //   id: key,
-      //   ...results[key],
-      // }));
       this.posts = results.posts;
       this.ratings = results.ratings;
     });
   }
 
-
-
-  getSearchedPosts() {
-    this.postsSearched = this.searchFormService.giveSearchedData();
-    console.log('the posts searched are : ' + this.postsSearched);
-  }
-
+  // je récupere l'id de l'utilisateur connecté
   getUserLoggedId() {
     this.userLogged = this.tokenService.getUserLogged();
     this.userLoggedId = this.userLogged.id;
-    console.log('the user logged is : ' + this.userLoggedId);
   }
 
+  // j'affiche ou cache le formulaire de création de post
   showHideForm() {
     this.formContainer = this.elementRef.nativeElement.querySelector('.form-container');
     this.showFormButton = this.elementRef.nativeElement.querySelector('.creator-button .showForm');
@@ -93,68 +72,61 @@ export class PostsComponent implements OnInit {
     });
   }
 
+  // je récupere les posts de l'utilisateur connecté
   getPostsData() {
-    let userLoggedId = this.userLoggedId;
-    console.log('liste des posts');
     this.dataService.getData(this.userLoggedId).subscribe((res: any) => {
-      console.log(res.posts);
       this.posts = res.posts;
 
-      this.path = "http://127.0.0.1:8000/storage"
-      this.assetPath = "http://127.0.0.1:8000/images"
-
+      this.path = this.serverPath + "storage";
+      this.assetPath = this.serverPath + "images";
     });
   }
+
+  // je récupere les ratings de l'utilisateur connecté
   getRatingsData() {
-    console.log('liste des ratings');
     this.dataService.getData(this.userLoggedId).subscribe((res: any) => {
-      console.log(res.ratings);
       this.ratings = res.ratings;
     });
   }
 
+  // je récupere l'image du post
   processFile(event: Event) {
     const file = (event.target as HTMLInputElement)?.files?.[0];
     this.imageFile = file;
   }
+
+  // je crée un post
   insertData() {
     const formData: any = new FormData();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'multipart/form-data'
+      })
+    };
+
     formData.append("user_id", this.userLoggedId);
     formData.append("image", this.imageFile);
     formData.append("title", this.post.title);
     formData.append("body", this.post.body);
     formData.append("rating_id", this.post.rating_id);
     formData.append("public", this.post.public);
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'multipart/form-data'
-      })
-    };
-    console.log('insertion d\'un post');
-    // this.post.image = file;
-    console.log(this.post.image);
-    console.log(this.post);
-    console.log(this.imageFile);
+
     this.post.image = this.imageFile;
     this.dataService.insertData(formData, httpOptions).subscribe(res => {
-      console.log(res);
-      // this.posts = res;
       this.getPostsData();
     });
   }
+
+  // je supprime un post
   deleteData(id: any) {
-    console.log(id);
-    console.log('suppression d\'un post');
-    // je veux envoyer mon bearer token dans la requête
-    
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.tokenService.getToken()}`
       })
     };
+
     this.dataService.deleteData(id, httpOptions).subscribe(res => {
-      console.log(res);
       this.getPostsData();
     });
   }

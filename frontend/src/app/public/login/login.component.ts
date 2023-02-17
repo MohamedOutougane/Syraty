@@ -3,9 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { DataService } from 'src/app/_service/data.service';
 import { ICredential } from 'src/app/_interface/credential';
 import { IuserReturn } from 'src/app/_interface/userReturn';
-import { Router } from '@angular/router';
 import { TokenService } from 'src/app/_service/token.service';
-import { PnavbarComponent } from 'src/app/public/pnavbar/pnavbar.component';
 
 
 @Component({
@@ -27,48 +25,34 @@ export class LoginComponent {
     user: {}
   }
 
-
-  // login = new Login();
   password: any;
   email: any;
   page: boolean = false;
-  // return: any;
+
+  constructor(private dataService: DataService, private tokenService: TokenService) { }
 
 
-  constructor(private dataService: DataService, private tokenService: TokenService, private router: Router) { }
-
-
+  // je recupere les données du formulaire et je les envois au service
+  // je recupere le token et le user et je les enregistre dans le local storage
   loginUser() {
     const formData: any = new FormData();
-    formData.append("email", this.form.email);
-    formData.append("password", this.form.password);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded'
       })
     };
-    console.log('insertion d\'un post');
-    console.log(this.form.email);
-    console.log(this.form.password);
-    console.log(this.form);
+
+    formData.append("email", this.form.email);
+    formData.append("password", this.form.password);
+    
     this.dataService.loginUser(this.form, httpOptions).subscribe(res=> {
-      console.log(res);
+
       this.return = res;
-      // this.return.user = res.user;
-      console.log(res);
-      console.log(this.return);
-      console.log(this.return.token);
-      console.log(this.return.user);
-      console.log(this.return.user);
 
       this.tokenService.saveToken(this.return.token);
       this.tokenService.saveUser(this.return.user);
 
-      // this.router.navigate(['posts']);
       this.setPagePosts();
-
-
-      // this.getPostsData();
     });
   }
 

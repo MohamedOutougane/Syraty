@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { TokenService } from 'src/app/_service/token.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,12 +8,9 @@ import { TokenService } from 'src/app/_service/token.service';
 export class DashboardComponent implements OnInit {
   page: any;
 
-  constructor(private activated: ActivatedRoute, private tokenService: TokenService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.activated.data.subscribe((data: any) => {
-      console.log(data.title);
-    });
   }
 
 }

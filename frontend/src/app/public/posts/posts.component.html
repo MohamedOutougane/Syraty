@@ -1,0 +1,91 @@
+
+<div class="posts-fil">
+    <div class="posts-creator">
+        <div class="form-container">
+            <form (ngSubmit)="insertData()" method="post" class="form-action-post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title">
+                        Titre
+                    </label>
+                    <input type="text" name="title" id="title" class="form-control" [(ngModel)]="post.title">
+                </div>
+                <div class="form-group">
+                    <label for="body">
+                        Contenu
+                    </label>
+                    <textarea name="body" id="body" cols="30" rows="10" class="form-control"
+                        [(ngModel)]="post.body"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image">
+                        Choisissez une image
+                    </label>
+                    <input enctype="multipart/form-data" type="file" name="image" id="inputImage" class="form-control"
+                        (change)="processFile($event)">
+                </div>
+                <div class="form-group">
+                    <label for="title">
+                        Choisissez une image
+                    </label>
+                    <select name="rating_id" id="rating_id" class="form-control" [(ngModel)]="post.rating_id">
+                        <option *ngFor="let rating of ratings;" value="{{rating.id}}">
+                            {{rating.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" name="public" id="public" [(ngModel)]="post.public">
+                </div>
+                <button type="submit">Poster</button>
+            </form>
+        </div>
+    
+    
+        <div class="creator-button">
+            <button class="showForm"><i class="fas fa-plus"></i>&nbsp; Ecrire ma journée</button>
+            <button class="hideForm"><i class="fas fa-minus"></i> &nbsp;Cacher mon formulaire</button>
+        </div>
+    </div>
+
+    <div *ngFor="let post of posts; let index = index;" class="post">
+        <div class="post-entete">
+            <div class="post-title">
+                <a href=" 'posts.show', $post->id ">
+                    {{post.title}} - {{post.created_at | date:'longDate'}}
+                </a>
+            </div>
+            <div [ngSwitch]="post.rating_id" class="post-rating">
+                <div *ngSwitchCase="1" class="circle red"></div>
+                <div *ngSwitchCase="2" class="circle orange"></div>
+                <div *ngSwitchCase="3" class="circle yellow"></div>
+                <div *ngSwitchCase="4" class="circle green"></div>
+                <div *ngSwitchCase="5" class="circle blue"></div>
+            </div>
+        </div>
+        <div class="post-content">
+            <div *ngIf="index % 2 == 0; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+                <div class="post-body">
+                    <p>{{post.body}}</p>
+                </div>
+                <div class="line-syraty"> </div>
+                <div class="post-image fill" style="background-image: url({{path}}/{{post.image}});">
+                </div>
+            </ng-template>
+            <ng-template #elseBlock>
+                <div class="post-image fill" style="background-image: url({{path}}/{{post.image}});">
+                </div>
+                <div class="line-syraty"> </div>
+                <div class="post-body">
+                    <p>{{post.body}}</p>
+                </div>
+            </ng-template>
+        </div>
+        <form action=" 'posts.destroy', $post" method="post">
+            <div class="post-delete-button">
+                <button (click)="deleteData(post.id)">Supprimer</button>
+            </div>
+        </form>
+    </div>
+    <img class="navigationImg" src="{{assetPath}}/navigation.png" alt="bvbv">
+</div>

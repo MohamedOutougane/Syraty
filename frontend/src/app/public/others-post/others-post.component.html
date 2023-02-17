@@ -2,7 +2,7 @@
     <div *ngFor="let post of posts; let index = index;" class="post">
         <div class="post-entete">
             <div class="post-title">
-                <a href=" 'posts.show', $post->id ">
+                <a href="">
                     {{post.title}} - {{post.user.name}} - {{post.created_at | date:'longDate'}}
                 </a>
             </div>

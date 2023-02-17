@@ -12,7 +12,7 @@ import { PnavbarComponent } from './pnavbar/pnavbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { RegisterComponent } from './register/register.component';
-
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -25,6 +25,7 @@ import { RegisterComponent } from './register/register.component';
     DashboardComponent,
     SearchFormComponent,
     RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,

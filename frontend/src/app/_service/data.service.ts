@@ -11,7 +11,7 @@ export const searchResults = new BehaviorSubject<any>([]);
 })
 export class DataService {
 
-  adresse: string = 'http://127.0.0.1:8000/api/';
+  adresse: string = "http://127.0.0.1:8000/api/";
 
   constructor(private httpClient: HttpClient) { }
   getPublicData() {

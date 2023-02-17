@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PnavbarComponent } from '../pnavbar/pnavbar.component';
 
 @Component({
   selector: 'app-playout',
@@ -7,6 +6,4 @@ import { PnavbarComponent } from '../pnavbar/pnavbar.component';
   styleUrls: ['./playout.component.css']
 })
 export class PlayoutComponent{
-
-  
 }

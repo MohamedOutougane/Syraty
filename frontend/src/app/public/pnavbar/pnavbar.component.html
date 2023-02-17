@@ -8,12 +8,12 @@
                 <div *ngIf="this.page == 'home'; then thenBlock else elseBlock"></div>
                 <ng-template #thenBlock>
                     <a class="nav-a active" aria-current="page" [routerLink]="['home']"
-                        (click)="setPageImIn('home'); getPageImIn()">
+                        (click)="setPageImIn('home')">
                         <i class="fas fa-home"></i>  <p class="fontNonResponsive">&nbsp; Home</p>  
                     </a>
                 </ng-template>
                 <ng-template #elseBlock>
-                    <a class="nav-a" [routerLink]="['home']" (click)="setPageImIn('home'); getPageImIn()">
+                    <a class="nav-a" [routerLink]="['home']" (click)="setPageImIn('home')">
                         <i class="fas fa-home"></i> <p class="fontNonResponsive">&nbsp; Home</p>
                     </a>
                 </ng-template>
@@ -22,12 +22,12 @@
                 <div *ngIf="this.page == 'othersPost'; then thenBlock1 else elseBlock2"></div>
                 <ng-template #thenBlock1>
                     <a class="nav-a active" aria-current="page" [routerLink]="['othersPost']"
-                        (click)="setPageImIn('othersPost'); getPageImIn()">
+                        (click)="setPageImIn('othersPost')">
                         <i class="fas fa-book"></i> <p class="fontNonResponsive">&nbsp; Les autres</p>
                     </a>
                 </ng-template>
                 <ng-template #elseBlock2>
-                    <a class="nav-a" [routerLink]="['othersPost']" (click)="setPageImIn('othersPost'); getPageImIn()">
+                    <a class="nav-a" [routerLink]="['othersPost']" (click)="setPageImIn('othersPost')">
                         <i class="fas fa-book"></i> <p class="fontNonResponsive">&nbsp; Les autres</p>
                     </a>
                 </ng-template>
@@ -39,12 +39,12 @@
                         <div *ngIf="this.page == 'posts'; then thenBlock3 else elseBlock4"></div>
                         <ng-template #thenBlock3>
                             <a class="nav-a active" aria-current="page" [routerLink]="['posts']"
-                                (click)="setPageImIn('posts'); getPageImIn()">
+                                (click)="setPageImIn('posts')">
                                 <i class="fas fa-bookmark"></i> <p class="fontNonResponsive">&nbsp; Ma bio</p>
                             </a>
                         </ng-template>
                         <ng-template #elseBlock4>
-                            <a class="nav-a" [routerLink]="['posts']" (click)="setPageImIn('posts'); getPageImIn()">
+                            <a class="nav-a" [routerLink]="['posts']" (click)="setPageImIn('posts')">
                                 <i class="fas fa-bookmark"></i> <p class="fontNonResponsive">&nbsp; Ma bio</p>
                             </a>
                         </ng-template>
@@ -61,12 +61,12 @@
                     <div *ngIf="this.page == 'dashboard'; then thenBlock5 else elseBlock6"></div>
                     <ng-template #thenBlock5>
                         <a class="nav-a active" aria-current="page" [routerLink]="['dashboard']"
-                            (click)="setPageImIn('dashboard'); getPageImIn()">
+                            (click)="setPageImIn('dashboard')">
                             <i class="fas fa-user"></i> <p class="fontNonResponsive">&nbsp; Profil</p>
                         </a>
                     </ng-template>
                     <ng-template #elseBlock6>
-                        <a class="nav-a" [routerLink]="['dashboard']" (click)="setPageImIn('dashboard'); getPageImIn()">
+                        <a class="nav-a" [routerLink]="['dashboard']" (click)="setPageImIn('dashboard')">
                             <i class="fas fa-user"></i> <p class="fontNonResponsive">&nbsp; Profil</p>
                         </a>
                     </ng-template>
@@ -80,7 +80,7 @@
             </ng-template>
             <ng-template #elseBlock8>
                 <a class="nav-a connexion button" aria-current="page" [routerLink]="['login']"
-                    (click)="setPageImIn('login'); getPageImIn()">
+                    (click)="setPageImIn('login')">
                         <i class="fas fa-sign-in-alt"></i> <p class="fontNonResponsive">&nbsp; Connexion</p>
                 </a>
             </ng-template>

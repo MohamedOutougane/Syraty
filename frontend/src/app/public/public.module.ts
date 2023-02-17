@@ -4,7 +4,6 @@ import { HomeComponent } from './home/home.component';
 import { OthersPostComponent } from './others-post/others-post.component';
 import { PostsComponent } from './posts/posts.component';
 import { PublicRoutingModule } from './public-routing.module';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PlayoutComponent } from './playout/playout.component';
@@ -30,7 +29,6 @@ import { LoginComponent } from './login/login.component';
   imports: [
     CommonModule,
     PublicRoutingModule,
-    // BrowserModule,
     HttpClientModule,
     FormsModule,
   ]

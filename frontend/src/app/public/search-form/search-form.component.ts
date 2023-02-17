@@ -1,8 +1,6 @@
 import { Component, ElementRef, Injectable } from '@angular/core';
 import { DataService } from 'src/app/_service/data.service';
 import { TokenService } from 'src/app/_service/token.service';
-import { PnavbarComponent } from '../pnavbar/pnavbar.component';
-import { PostsComponent } from '../posts/posts.component';
 import { searchResults } from 'src/app/_service/data.service';
 
 @Injectable({
@@ -32,25 +30,19 @@ export class SearchFormComponent {
     constructor(
       private dataService: DataService, 
       private tokenService: TokenService, 
-      private pNavbarComponent: PnavbarComponent,
       private elementRef: ElementRef
-    
-      ) { }
+    ) { }
   
     ngOnInit() {
       this.getRatingsData();
       this.showHideForm();
     }
 
+    // je récupere les valeurs de la recherche
     search(searchForm: { value: any; }){
-
-      
-
-      // this.getRatingsData();
       const formData: any = new FormData();
 
       if (this.tokenService.getPage() == '"posts"') {
-
 
         this.getUserLoggedId();
 
@@ -59,20 +51,9 @@ export class SearchFormComponent {
         }
 
         formData.append('user_id', this.userLoggedId);
-
-        console.log('the user logged is : ' + this.userLoggedId);
-
-
         this.page = 1;
       }
 
-
-      console.log('the page is : ' + this.tokenService.getPage());
-
-      
-
-
-      
       formData.append('search', this.query);
 
       if (this.startDate == null) {
@@ -84,25 +65,20 @@ export class SearchFormComponent {
       if (this.selectedRating == null) {
         this.selectedRating = '';
       }
+
       formData.append('start_date', this.startDate);
       formData.append('end_date', this.endDate);
       formData.append('rating', this.selectedRating);
-        console.log(searchForm.value);
-        console.log(formData);
 
-        this.dataService.getSearchedData(formData).subscribe((data:any) => {
-          console.log(formData);
-          console.log(data);
-          this.postsSearched = data;
-
-          searchResults.next(this.postsSearched);
-        });
+      this.dataService.getSearchedData(formData).subscribe((data:any) => {
+        this.postsSearched = data;
+        searchResults.next(this.postsSearched);
+      });
 
       this.searchForm =  formData;
-
-      
     }
 
+    // je cache et affiche le formulaire de recherche
     showHideForm() {
       this.searchContainer = this.elementRef.nativeElement.querySelector('.search-container');
       this.showFormButton = this.elementRef.nativeElement.querySelector('.searchForm-button .showForm');
@@ -124,25 +100,25 @@ export class SearchFormComponent {
       });
     }
 
+    // je récupere l'id de l'utilisateur connecté
     getUserLoggedId() {
       this.userLogged = this.tokenService.getUserLogged();
       this.userLoggedId = this.userLogged.id;
-      console.log('the user logged is : ' + this.userLoggedId);
     }
 
+    // je récupere les données du formulaire de recherche
     getpostsSearchedData() {
         return this.searchForm;
     }
 
-
+    // je récupere les posts de la recherche
     getPostsSearched() {
       return this.postsSearched;
     }
 
+    // je récupere les ratings
     getRatingsData() {
-      console.log('liste des ratings');
       this.dataService.getPublicData().subscribe((res: any) => {
-        console.log(res.ratings);
         this.ratings = res.ratings;
       });
     }

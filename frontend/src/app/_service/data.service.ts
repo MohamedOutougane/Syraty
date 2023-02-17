@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
 import { Post } from '../post';
-import { Login } from '../login';
 import { ICredential } from '../_interface/credential';
 import { IuserReturn } from '../_interface/userReturn';
 import { BehaviorSubject } from 'rxjs';

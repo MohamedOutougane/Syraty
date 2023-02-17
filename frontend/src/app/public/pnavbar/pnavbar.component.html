@@ -9,12 +9,12 @@
                 <ng-template #thenBlock>
                     <a class="nav-a active" aria-current="page" [routerLink]="['home']"
                         (click)="setPageImIn('home'); getPageImIn()">
-                        Home
+                        <i class="fas fa-home"></i>  <p class="fontNonResponsive">&nbsp; Home</p>  
                     </a>
                 </ng-template>
                 <ng-template #elseBlock>
                     <a class="nav-a" [routerLink]="['home']" (click)="setPageImIn('home'); getPageImIn()">
-                        Home
+                        <i class="fas fa-home"></i> <p class="fontNonResponsive">&nbsp; Home</p>
                     </a>
                 </ng-template>
             </li>
@@ -23,12 +23,12 @@
                 <ng-template #thenBlock1>
                     <a class="nav-a active" aria-current="page" [routerLink]="['othersPost']"
                         (click)="setPageImIn('othersPost'); getPageImIn()">
-                        Les autres
+                        <i class="fas fa-book"></i> <p class="fontNonResponsive">&nbsp; Les autres</p>
                     </a>
                 </ng-template>
                 <ng-template #elseBlock2>
                     <a class="nav-a" [routerLink]="['othersPost']" (click)="setPageImIn('othersPost'); getPageImIn()">
-                        Les autres
+                        <i class="fas fa-book"></i> <p class="fontNonResponsive">&nbsp; Les autres</p>
                     </a>
                 </ng-template>
             </li>
@@ -40,12 +40,12 @@
                         <ng-template #thenBlock3>
                             <a class="nav-a active" aria-current="page" [routerLink]="['posts']"
                                 (click)="setPageImIn('posts'); getPageImIn()">
-                                Ma bio
+                                <i class="fas fa-bookmark"></i> <p class="fontNonResponsive">&nbsp; Ma bio</p>
                             </a>
                         </ng-template>
                         <ng-template #elseBlock4>
                             <a class="nav-a" [routerLink]="['posts']" (click)="setPageImIn('posts'); getPageImIn()">
-                                Ma bio
+                                <i class="fas fa-bookmark"></i> <p class="fontNonResponsive">&nbsp; Ma bio</p>
                             </a>
                         </ng-template>
                     <!-- </ng-template> -->
@@ -62,26 +62,26 @@
                     <ng-template #thenBlock5>
                         <a class="nav-a active" aria-current="page" [routerLink]="['dashboard']"
                             (click)="setPageImIn('dashboard'); getPageImIn()">
-                            Profil
+                            <i class="fas fa-user"></i> <p class="fontNonResponsive">&nbsp; Profil</p>
                         </a>
                     </ng-template>
                     <ng-template #elseBlock6>
                         <a class="nav-a" [routerLink]="['dashboard']" (click)="setPageImIn('dashboard'); getPageImIn()">
-                            Profil
+                            <i class="fas fa-user"></i> <p class="fontNonResponsive">&nbsp; Profil</p>
                         </a>
                     </ng-template>
 
                 </li>
                 <li class="nav-li">
                     <a class="nav-a deconnexion button" (click)="logout()">
-                        Deconnexion
+                        <i class="fas fa-sign-out-alt"></i> <p class="fontNonResponsive">&nbsp; Deconnexion</p>
                     </a>
                 </li>
             </ng-template>
             <ng-template #elseBlock8>
                 <a class="nav-a connexion button" aria-current="page" [routerLink]="['login']"
                     (click)="setPageImIn('login'); getPageImIn()">
-                    Connexion
+                        <i class="fas fa-sign-in-alt"></i> <p class="fontNonResponsive">&nbsp; Connexion</p>
                 </a>
             </ng-template>
         </div>

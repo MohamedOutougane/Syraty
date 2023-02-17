@@ -106,3 +106,24 @@ input {
 	width: 100%;
 	z-index: 2;
 }
+
+@media (max-width: 425px) {
+
+    .container{
+        max-width: 75%;
+        min-height: 400px;
+        font-size: 13px;
+    }
+
+    form {
+        padding: 0 20px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    a {
+        font-size: 11px;
+    }
+}

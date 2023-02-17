@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, ElementRef, Injectable } from '@angular/core';
 import { DataService } from 'src/app/_service/data.service';
 import { TokenService } from 'src/app/_service/token.service';
 import { PnavbarComponent } from '../pnavbar/pnavbar.component';
@@ -24,11 +24,22 @@ export class SearchFormComponent {
   postsSearched: any;
   searchForm: any;
   page: any;
+  searchContainer: any;
+  button: any;
+  showFormButton: any;
+  hideFormButton: any;
   
-    constructor(private dataService: DataService, private tokenService: TokenService, private pNavbarComponent: PnavbarComponent) { }
+    constructor(
+      private dataService: DataService, 
+      private tokenService: TokenService, 
+      private pNavbarComponent: PnavbarComponent,
+      private elementRef: ElementRef
+    
+      ) { }
   
     ngOnInit() {
       this.getRatingsData();
+      this.showHideForm();
     }
 
     search(searchForm: { value: any; }){
@@ -90,6 +101,27 @@ export class SearchFormComponent {
       this.searchForm =  formData;
 
       
+    }
+
+    showHideForm() {
+      this.searchContainer = this.elementRef.nativeElement.querySelector('.search-container');
+      this.showFormButton = this.elementRef.nativeElement.querySelector('.searchForm-button .showForm');
+      this.hideFormButton = this.elementRef.nativeElement.querySelector('.searchForm-button .hideForm');
+
+      this.searchContainer.style.display = 'none';
+      this.hideFormButton.style.display = 'none';
+
+      this.showFormButton.addEventListener('click', () => {
+        this.searchContainer.style.display = 'block';
+        this.showFormButton.style.display = 'none';
+        this.hideFormButton.style.display = 'block';
+      });
+      
+      this.hideFormButton.addEventListener('click', () => {
+        this.searchContainer.style.display = 'none';
+        this.hideFormButton.style.display = 'none';
+        this.showFormButton.style.display = 'block';
+      });
     }
 
     getUserLoggedId() {

@@ -27,6 +27,8 @@ export class PostsComponent implements OnInit {
   userLoggedId: any;
   postsSearched: any;
   page: any;
+  showFormButton: any;
+  hideFormButton: any;
 
   constructor(
     private dataService: DataService, 
@@ -57,7 +59,7 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  
+
 
   getSearchedPosts() {
     this.postsSearched = this.searchFormService.giveSearchedData();
@@ -72,10 +74,22 @@ export class PostsComponent implements OnInit {
 
   showHideForm() {
     this.formContainer = this.elementRef.nativeElement.querySelector('.form-container');
-    this.button = this.elementRef.nativeElement.querySelector('.creator-button button');
+    this.showFormButton = this.elementRef.nativeElement.querySelector('.creator-button .showForm');
+    this.hideFormButton = this.elementRef.nativeElement.querySelector('.creator-button .hideForm');
+
     this.formContainer.style.display = 'none';
-    this.button.addEventListener('click', () => {
-      this.formContainer.style.display = this.formContainer.style.display === 'none' ? 'block' : 'none';
+    this.hideFormButton.style.display = 'none';
+
+    this.showFormButton.addEventListener('click', () => {
+      this.formContainer.style.display = 'block';
+      this.showFormButton.style.display = 'none';
+      this.hideFormButton.style.display = 'block';
+    });
+    
+    this.hideFormButton.addEventListener('click', () => {
+      this.formContainer.style.display = 'none';
+      this.hideFormButton.style.display = 'none';
+      this.showFormButton.style.display = 'block';
     });
   }
 

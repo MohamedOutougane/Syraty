@@ -1,9 +1,6 @@
 
 <div class="posts-fil">
     <div class="posts-creator">
-        <div class="creator-title">
-            Créer un post
-        </div>
         <div class="form-container">
             <form (ngSubmit)="insertData()" method="post" class="form-action-post" enctype="multipart/form-data">
                 <div class="form-group">
@@ -45,7 +42,8 @@
     
     
         <div class="creator-button">
-            <button><i class="fa-solid fa-plus"></i></button>
+            <button class="showForm"><i class="fas fa-plus"></i>&nbsp; Ecrire ma journée</button>
+            <button class="hideForm"><i class="fas fa-minus"></i> &nbsp;Cacher mon formulaire</button>
         </div>
     </div>
 

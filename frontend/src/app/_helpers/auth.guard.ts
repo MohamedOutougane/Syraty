@@ -10,6 +10,8 @@ export class AuthGuard implements CanActivate {
 
   constructor(private router: Router, private tokenService: TokenService){}
 
+  // canActivate sert a autoriser l'acces a une route si l'utilisateur est connecté, 
+  // sinon il est redirigé vers la page de login
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

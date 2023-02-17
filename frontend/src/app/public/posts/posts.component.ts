@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { TokenService } from 'src/app/_service/token.service';
 import { SearchFormComponent } from 'src/app/public/search-form/search-form.component';
 import { PnavbarComponent } from '../pnavbar/pnavbar.component';
-import { SearchPostsService } from 'src/app/_service/search-posts.service';
 import { searchResults } from 'src/app/_service/data.service';
 
 @Component({
@@ -36,7 +35,6 @@ export class PostsComponent implements OnInit {
     private activated: ActivatedRoute, 
     private tokenService: TokenService,
     private pnavbarComponent: PnavbarComponent,
-    private searchFormService: SearchPostsService
   ) { }
 
   ngOnInit(): void {
@@ -47,7 +45,6 @@ export class PostsComponent implements OnInit {
     this.activated.data.subscribe((data: any) => {
       console.log(data);
     });
-    this.getSearchedPosts();
     searchResults.subscribe((results) => {
       console.log('the results are : ' + JSON.stringify(results))
       // const resultsArray = Object.keys(results).map((key) => ({
@@ -61,10 +58,7 @@ export class PostsComponent implements OnInit {
 
 
 
-  getSearchedPosts() {
-    this.postsSearched = this.searchFormService.giveSearchedData();
-    console.log('the posts searched are : ' + this.postsSearched);
-  }
+
 
   getUserLoggedId() {
     this.userLogged = this.tokenService.getUserLogged();

@@ -1,0 +1,40 @@
+<div class="register-page">
+    <div class="container" id="container">
+        <div class="form-container sign-in-container">
+            <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && registerUser()">
+                <h1>S'inscrire</h1>
+                <div class="group">
+                    <input placeholder="Name" type="text" name="name" id="name" [(ngModel)]="form.name"
+                        #name="ngModel" required>
+                    <div class="form_error" *ngIf="name.errors && f.submitted">
+                        Name is required !
+                    </div>
+                </div>
+                <div class="group">
+                    <input placeholder="Email" type="text" name="email" id="email" [(ngModel)]="form.email"
+                        #email="ngModel" required>
+                    <div class="form_error" *ngIf="email.errors && f.submitted">
+                        Email is required !
+                    </div>
+                </div>
+                <div class="group">
+                    <input placeholder="Password" type="password" name="password" id="password"
+                        [(ngModel)]="form.password" #password="ngModel" required>
+                    <div class="form_error" *ngIf="password.errors && f.submitted">
+                        Password is required !
+                    </div>
+                </div>
+                <div class="group">
+                    <input placeholder="Password Confirmation" type="password" name="password_confirmation" id="password_confirmation"
+                        [(ngModel)]="form.password_confirmation" #password_confirmation="ngModel" required>
+                    <div class="form_error" *ngIf="password_confirmation.errors && f.submitted">
+                        Password is required !
+                    </div>
+                </div>
+                <div class="group button">
+                    <button>Inscription</button> <a href="" [routerLink]="['../login']">Vous avez déja un compte? Connectez-vous !</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

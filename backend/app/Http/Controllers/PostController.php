@@ -378,8 +378,13 @@ class PostController extends Controller
             $imageName = null;
         }
 
-        // définit la valeur de $public si la clé "public" existe dans $data à 1, sinon elle est définie à 0.
-        $public = array_key_exists('public', $data) ? 1 : 0;
+        // si la valeur de $public est a 'undefined' alors je la définie à 0, sinon je la définit a 1
+        $public = $data['public'];
+        if($public == 'undefined'){
+            $public = 0;
+        } else {
+            $public = 1;
+        }
 
         // je crée un nouvel article avec les données du formulaire
         $post = Post::create([
